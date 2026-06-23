@@ -1,0 +1,545 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+      name="viewport"
+    />
+    <title>Unsaid Wall - Community</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#004a1f",
+              "secondary-fixed-dim": "#80eb97",
+              "on-tertiary-fixed-variant": "#005c62",
+              "on-tertiary": "#cefbff",
+              "secondary-fixed": "#8ef9a4",
+              "secondary-container": "#8ef9a4",
+              "on-surface-variant": "#3e6444",
+              "inverse-primary": "#7df168",
+              "surface-variant": "#b0ebb6",
+              secondary: "#006a30",
+              "primary-fixed": "#7df168",
+              surface: "#dfffde",
+              primary: "#006b00",
+              "on-primary-fixed": "#004200",
+              "on-tertiary-container": "#005257",
+              "tertiary-fixed-dim": "#00dbe8",
+              "surface-bright": "#dfffde",
+              "error-container": "#f95630",
+              "surface-container-low": "#cdfdd0",
+              "outline-variant": "#8eb792",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#520c00",
+              "surface-container-highest": "#b0ebb6",
+              "on-secondary-fixed-variant": "#006a30",
+              "surface-tint": "#006b00",
+              "surface-container-high": "#b9f0be",
+              outline: "#59805e",
+              "error-dim": "#b92902",
+              "on-background": "#10361a",
+              background: "#dfffde",
+              "secondary-dim": "#005d29",
+              "primary-dim": "#005d00",
+              "on-primary-container": "#005800",
+              "tertiary-dim": "#00595e",
+              "on-secondary": "#ceffd1",
+              "on-error": "#ffefec",
+              "on-secondary-container": "#005f2a",
+              "tertiary-container": "#05ebf9",
+              tertiary: "#00666c",
+              "primary-fixed-dim": "#6fe25b",
+              "surface-container": "#c1f5c5",
+              "on-primary": "#d3ffc2",
+              "surface-dim": "#a4e3ac",
+              error: "#b02500",
+              "inverse-surface": "#001204",
+              "inverse-on-surface": "#7ea782",
+              "on-tertiary-fixed": "#003d41",
+              "tertiary-fixed": "#05ebf9",
+              "on-primary-fixed-variant": "#006300",
+              "primary-container": "#7df168",
+              "on-surface": "#10361a",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "16px",
+              unit: "8px",
+              "section-gap": "48px",
+              "container-padding": "24px",
+            },
+            fontFamily: {
+              "label-sm": ["Plus Jakarta Sans"],
+              "headline-md": ["Literata"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "display-lg": ["Literata"],
+              "body-md": ["Plus Jakarta Sans"],
+              "display-lg-mobile": ["Literata"],
+            },
+            fontSize: {
+              "label-sm": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "500" },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "display-lg": [
+                "40px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+
+      body {
+        background-color: #dfffde;
+        background-image:
+          radial-gradient(
+            at 0% 0%,
+            rgba(125, 241, 104, 0.15) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 100% 100%,
+            rgba(5, 235, 249, 0.1) 0px,
+            transparent 50%
+          );
+        min-height: 100vh;
+      }
+
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+
+  <body class="font-body-md text-on-surface antialiased overflow-x-hidden">
+    <!-- Top App Bar -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-md shadow-[0px_4px_20px_rgba(5,139,3,0.05)]"
+    >
+      <div
+        class="flex items-center justify-between px-container-padding h-16 w-full max-w-720 mx-auto"
+      >
+        <div
+          class="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
+        >
+          <span
+            class="material-symbols-outlined text-primary font-variation-settings-fill"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >spa</span
+          >
+          <h1
+            class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tight"
+          >
+            Unsaid Wall
+          </h1>
+        </div>
+      </div>
+    </header>
+    <main class="pt-20 pb-32 px-4 max-w-720 mx-auto space-y-6">
+      <!-- Pinned Announcement -->
+      <section
+        class="glass-card rounded-xl p-5 border-l-4 border-l-primary relative overflow-hidden"
+      >
+        <div class="absolute top-0 right-0 p-2 opacity-10">
+          <span class="material-symbols-outlined text-6xl">campaign</span>
+        </div>
+        <div class="flex gap-3 items-start relative z-10">
+          <div
+            class="bg-primary-container p-2 rounded-full flex items-center justify-center"
+          >
+            <span
+              class="material-symbols-outlined text-on-primary-container text-xl"
+              >campaign</span
+            >
+          </div>
+          <div class="space-y-1">
+            <h2 class="font-headline-md text-sm font-bold text-primary">
+              Community Guidelines Updated
+            </h2>
+            <p class="font-body-md text-sm text-on-surface-variant">
+              We've added new resources for the Healing community. Please take a
+              look at the updated moderation policy.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Controls: Sort & Filter -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="relative group">
+            <button
+              class="flex items-center gap-1 text-on-surface-variant font-label-sm hover:text-primary transition-colors"
+            >
+              Sort By: Trending
+              <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+          </div>
+        </div>
+        <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-2">
+          <button
+            class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm shadow-sm"
+          >
+            All Wall
+          </button>
+          <button
+            class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-primary-container transition-colors"
+          >
+            Anxiety
+          </button>
+          <button
+            class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-primary-container transition-colors"
+          >
+            Grief
+          </button>
+          <button
+            class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-primary-container transition-colors"
+          >
+            Hope
+          </button>
+          <button
+            class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-primary-container transition-colors"
+          >
+            Loneliness
+          </button>
+          <button
+            class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-primary-container transition-colors"
+          >
+            Healing
+          </button>
+        </div>
+      </div>
+      <!-- Post Cards -->
+      <div class="space-y-4">
+        <!-- Post 1 -->
+        <article
+          class="glass-card p-6 rounded-lg space-y-4 shadow-[0px_4px_20px_rgba(5,139,3,0.03)] group transition-all duration-300"
+        >
+          <div class="flex justify-between items-center">
+            <span
+              class="px-3 py-1 bg-tertiary-container/30 text-on-tertiary-container rounded-full font-label-sm text-[11px] uppercase tracking-wider"
+              >Loneliness</span
+            >
+            <span class="text-outline text-[11px] font-label-sm">2h ago</span>
+          </div>
+          <p class="font-body-lg text-on-surface leading-relaxed">
+            It's quiet tonight. I find myself looking at the stars and wondering
+            if anyone else is looking at the same ones, feeling just as small
+            and just as alone. It's okay to not be okay, right?
+          </p>
+          <div class="flex items-center gap-4 pt-2">
+            <button
+              class="reaction-btn flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-all active:scale-90"
+            >
+              <span class="material-symbols-outlined text-lg">favorite</span>
+              <span class="font-label-sm">124</span>
+            </button>
+            <button
+              class="reaction-btn flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-all active:scale-90"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >auto_awesome</span
+              >
+              <span class="font-label-sm">56</span>
+            </button>
+          </div>
+        </article>
+        <!-- Post 2 -->
+        <article
+          class="glass-card p-6 rounded-lg space-y-4 shadow-[0px_4px_20px_rgba(5,139,3,0.03)]"
+        >
+          <div class="flex justify-between items-center">
+            <span
+              class="px-3 py-1 bg-secondary-container/30 text-on-secondary-container rounded-full font-label-sm text-[11px] uppercase tracking-wider"
+              >Hope</span
+            >
+            <span class="text-outline text-[11px] font-label-sm">5h ago</span>
+          </div>
+          <p class="font-body-lg text-on-surface leading-relaxed">
+            After three years of feeling like I was underwater, I finally felt
+            the sun on my face today. It was just for a minute, but it was
+            there. Hold on, everyone. The sun still exists.
+          </p>
+          <div class="flex items-center gap-4 pt-2">
+            <button
+              class="reaction-btn flex items-center gap-1.5 text-on-surface-variant"
+            >
+              <span class="material-symbols-outlined text-lg">favorite</span>
+              <span class="font-label-sm">482</span>
+            </button>
+            <button
+              class="reaction-btn flex items-center gap-1.5 text-on-surface-variant"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >auto_awesome</span
+              >
+              <span class="font-label-sm">203</span>
+            </button>
+          </div>
+        </article>
+        <!-- Post 3 -->
+        <article
+          class="glass-card p-6 rounded-lg space-y-4 shadow-[0px_4px_20px_rgba(5,139,3,0.03)]"
+        >
+          <div class="flex justify-between items-center">
+            <span
+              class="px-3 py-1 bg-error-container/20 text-error rounded-full font-label-sm text-[11px] uppercase tracking-wider"
+              >Grief</span
+            >
+            <span class="text-outline text-[11px] font-label-sm">8h ago</span>
+          </div>
+          <p class="font-body-lg text-on-surface leading-relaxed">
+            I still reach for my phone to text him. Then the weight of the
+            silence hits me all over again. Today is hard. Just needed to say it
+            out loud somewhere.
+          </p>
+          <div class="flex items-center gap-4 pt-2">
+            <button
+              class="reaction-btn flex items-center gap-1.5 text-on-surface-variant"
+            >
+              <span class="material-symbols-outlined text-lg">favorite</span>
+              <span class="font-label-sm">95</span>
+            </button>
+            <button
+              class="reaction-btn flex items-center gap-1.5 text-on-surface-variant"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >auto_awesome</span
+              >
+              <span class="font-label-sm">31</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </main>
+    <!-- FAB -->
+    <button
+      class="fixed bottom-24 right-6 bg-primary text-on-primary p-4 rounded-full shadow-lg flex items-center gap-2 active:scale-95 transition-transform z-40 group"
+      id="fab"
+    >
+      <span class="material-symbols-outlined">edit_note</span>
+      <span class="font-label-sm pr-2">Share Something</span>
+    </button>
+    <!-- Bottom Nav -->
+    <nav
+      class="fixed bottom-0 left-0 w-full bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-xl shadow-[0px_-4px_24px_rgba(5,139,3,0.08)] z-50 rounded-t-xl"
+    >
+      <div
+        class="flex justify-around items-center px-4 py-3 pb-safe max-w-720 mx-auto"
+      >
+        <a
+          class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-5 py-1.5 transition-all duration-300"
+          href="Community_Wall_Guest_.html""
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >grid_view</span
+          >
+          <span class="font-label-sm text-label-sm">Wall</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1.5 hover:text-primary transition-all duration-200"
+          href="Login.html""
+        >
+          <span class="material-symbols-outlined">auto_stories</span>
+          <span class="font-label-sm text-label-sm">Journal</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1.5 hover:text-primary transition-all duration-200"
+          href="Coach_Directory.html""
+        >
+          <span class="material-symbols-outlined">psychology</span>
+          <span class="font-label-sm text-label-sm">Coaches</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-5 py-1.5 hover:text-primary transition-all duration-200"
+          href="Resource_Library.html""
+        >
+          <span class="material-symbols-outlined">local_library</span>
+          <span class="font-label-sm text-label-sm">Resources</span>
+        </a>
+      </div>
+    </nav>
+    <!-- Modal Background -->
+    <div
+      class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-6 transition-opacity duration-300 opacity-0"
+      id="modal-overlay"
+    >
+      <div
+        class="bg-surface w-full max-w-sm rounded-xl p-8 space-y-6 shadow-2xl scale-95 transition-transform duration-300"
+        id="modal-content"
+      >
+        <div
+          class="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center mx-auto"
+        >
+          <span class="material-symbols-outlined text-primary text-4xl"
+            >lock</span
+          >
+        </div>
+        <div class="text-center space-y-2">
+          <h3 class="font-headline-md text-on-surface">Community Space</h3>
+          <p class="font-body-md text-on-surface-variant">
+            To protect the safety and anonymity of our wall, please login or
+            register to share your thoughts or send empathy.
+          </p>
+        </div>
+        <div class="space-y-3">
+          <button
+            class="w-full py-3 bg-primary text-on-primary rounded-full font-label-sm hover:opacity-90 active:scale-95 transition-all"
+          >
+            Login or Register
+          </button>
+          <button
+            class="w-full py-3 text-on-surface-variant font-label-sm hover:text-primary transition-colors"
+            id="close-modal"
+          >
+            Maybe Later
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const fab = document.getElementById("fab");
+      const modalOverlay = document.getElementById("modal-overlay");
+      const modalContent = document.getElementById("modal-content");
+      const closeModal = document.getElementById("close-modal");
+      const reactionBtns = document.querySelectorAll(".reaction-btn");
+
+      function openModal() {
+        modalOverlay.classList.remove("hidden");
+        // Trigger browser reflow for transitions
+        setTimeout(() => {
+          modalOverlay.classList.remove("opacity-0");
+          modalContent.classList.remove("scale-95");
+        }, 10);
+      }
+
+      function hideModal() {
+        modalOverlay.classList.add("opacity-0");
+        modalContent.classList.add("scale-95");
+        setTimeout(() => {
+          modalOverlay.classList.add("hidden");
+        }, 300);
+      }
+
+      fab.addEventListener("click", openModal);
+      reactionBtns.forEach((btn) =>
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal();
+        }),
+      );
+
+      closeModal.addEventListener("click", hideModal);
+      modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) hideModal();
+      });
+
+      // Small atmospheric micro-interaction: Subtle hover glow for cards
+      document.querySelectorAll(".glass-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        });
+      });
+    </script>
+  
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Wire any "Login or Register" buttons
+  document.querySelectorAll('button').forEach(function(btn) {
+    var t = btn.innerText.trim();
+    if (t === 'Login or Register' || t.includes('Login')) {
+      btn.onclick = function() { window.location.href = 'Login.html'; };
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('button').forEach(function(btn) {
+    var t = (btn.textContent || btn.innerText).trim();
+    if (t === 'Login or Register') {
+      btn.onclick = function() { window.location.href = 'Login.html'; };
+    }
+  });
+});
+</script>
+</body>
+</html>

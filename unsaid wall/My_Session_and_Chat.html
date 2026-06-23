@@ -1,0 +1,710 @@
+<!doctype html>
+<html
+  class="light"
+  lang="en"
+  style="width: 1280px; height: 1024px; overflow: hidden; position: relative"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Sessions | Unsaid Wall</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              secondary: "#006a30",
+              "on-tertiary-container": "#005257",
+              background: "#dfffde",
+              "secondary-dim": "#005d29",
+              "outline-variant": "#8eb792",
+              "on-background": "#10361a",
+              surface: "#dfffde",
+              "primary-container": "#7df168",
+              "surface-bright": "#dfffde",
+              "on-primary-fixed-variant": "#006300",
+              "inverse-primary": "#7df168",
+              error: "#b02500",
+              "tertiary-container": "#05ebf9",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#80eb97",
+              "on-tertiary": "#cefbff",
+              "inverse-surface": "#001204",
+              "surface-container-high": "#b9f0be",
+              "on-secondary-fixed": "#004a1f",
+              "surface-container": "#c1f5c5",
+              "secondary-fixed": "#8ef9a4",
+              "on-error-container": "#520c00",
+              "surface-tint": "#006b00",
+              "on-surface": "#10361a",
+              "on-surface-variant": "#3e6444",
+              "surface-container-low": "#cdfdd0",
+              "tertiary-fixed-dim": "#00dbe8",
+              "on-primary-fixed": "#004200",
+              "inverse-on-surface": "#7ea782",
+              "error-dim": "#b92902",
+              "tertiary-dim": "#00595e",
+              "on-secondary": "#ceffd1",
+              "on-primary": "#d3ffc2",
+              "surface-variant": "#b0ebb6",
+              primary: "#006b00",
+              "secondary-container": "#8ef9a4",
+              "primary-dim": "#005d00",
+              "on-secondary-container": "#005f2a",
+              "tertiary-fixed": "#05ebf9",
+              "primary-fixed-dim": "#6fe25b",
+              outline: "#59805e",
+              "on-tertiary-fixed": "#003d41",
+              "on-tertiary-fixed-variant": "#005c62",
+              "on-primary-container": "#005800",
+              "on-error": "#ffefec",
+              "on-secondary-fixed-variant": "#006a30",
+              "surface-container-highest": "#b0ebb6",
+              tertiary: "#00666c",
+              "surface-dim": "#a4e3ac",
+              "primary-fixed": "#7df168",
+              "error-container": "#f95630",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "16px",
+              "container-padding": "24px",
+              "section-gap": "48px",
+              unit: "8px",
+            },
+            fontFamily: {
+              "display-lg-mobile": ["Literata"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-md": ["Literata"],
+              "label-sm": ["Plus Jakarta Sans"],
+              "display-lg": ["Literata"],
+            },
+            fontSize: {
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "500" },
+              ],
+              "label-sm": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "40px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #dfffde;
+        /* surface color as base */
+        overflow: hidden;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .chat-scroll::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .chat-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .chat-scroll::-webkit-scrollbar-thumb {
+        background: rgba(0, 107, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .chat-scroll::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 107, 0, 0.2);
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+
+  <body class="font-body-md text-on-surface">
+    <!-- Top Navigation Bar -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm shadow-primary/5"
+    >
+      <div
+        class="flex justify-between items-center px-container-padding h-16 max-w-7xl mx-auto"
+      >
+        <div class="flex items-center gap-8">
+          <span class="font-display-lg text-[28px] font-bold text-primary"
+            >Unsaid Wall</span
+          >
+          <div class="hidden md:flex items-center gap-6">
+            <a
+              class="text-on-surface-variant hover:text-primary transition-colors"
+              href="Community_Wall_User_.html"
+              >Wall</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary transition-colors"
+              href="Emotion_journal.html"
+              >Journal</a
+            >
+            <a
+              class="text-primary font-bold border-b-2 border-primary pb-1"
+              href="Coach_Directory.html"
+              >Coaches</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary transition-colors"
+              href="Resource_Library.html"
+              >Resources</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="p-2 rounded-full hover:bg-primary/5 transition-colors">
+            <span class="material-symbols-outlined text-on-surface-variant"
+              >search</span
+            >
+          </button>
+          <div
+            class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs"
+          >
+            JD
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Container: 100vh - Header -->
+    <main class="pt-16 h-screen flex overflow-hidden">
+      <!-- Left Sidebar: Session List -->
+      <aside
+        class="w-80 bg-surface-container-low border-r border-outline-variant/10 flex flex-col"
+      >
+        <div class="p-6">
+          <h2 class="font-headline-md text-xl text-primary mb-4">
+            My Sessions
+          </h2>
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-sm"
+              >search</span
+            >
+            <input
+              class="w-full bg-surface-container-lowest border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20"
+              placeholder="Search coaches..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex-1 overflow-y-auto px-4 pb-4 space-y-2 chat-scroll">
+          <!-- Active Now Section -->
+          <div
+            class="mt-2 mb-1 px-2 text-[11px] font-bold uppercase tracking-wider text-on-surface-variant/60"
+          >
+            Active Now
+          </div>
+          <button
+            class="w-full text-left p-3 rounded-2xl bg-secondary-container/40 border border-secondary/10 flex gap-3 transition-all active:scale-95"
+          >
+            <div class="relative flex-shrink-0">
+              <img
+                alt="Dr. Sarah Jenkins"
+                class="w-12 h-12 rounded-full object-cover"
+                data-alt="A professional headshot of a female therapist in her 40s with a warm, empathetic expression. She has light brown hair and is wearing a soft green sweater. The background is a blurred, sunlit office with plants, creating a calm and secure therapeutic atmosphere for mental health support."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCorQ15gulwOYvTSqEp9Q0xIlAPMjmN7APHIYDmetWpQ5WlQ-dPW3tH-uPRo6Y7TxAvtniXlvJrE3LAuI6ZOJc_ISzDW75Ne0x0yJyJYNaPq3tHSmfIOFrcM-jJVKw9V6-wnXkKiaThmtp7dsoLKQta44ceIbXMALfx4BHkeo77j2Glem4Mvu1nGzNzBnXN3fRcR4IMm6uLninQ0zYl39fzZgfvkGtudEfrsaNnizkrii6U0MhszRBqxfK3YMGpvfZrBup53tnOqkB"
+              />
+              <span
+                class="absolute bottom-0 right-0 w-3 h-3 bg-secondary border-2 border-surface-container-low rounded-full"
+              ></span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-start">
+                <span class="font-semibold text-sm truncate"
+                  >Dr. Sarah Jenkins</span
+                >
+                <span class="text-[10px] text-secondary font-bold">LIVE</span>
+              </div>
+              <p class="text-xs text-on-surface-variant truncate">
+                "I'm here when you're ready..."
+              </p>
+            </div>
+          </button>
+          <!-- Pending Approval Section -->
+          <div
+            class="mt-6 mb-1 px-2 text-[11px] font-bold uppercase tracking-wider text-on-surface-variant/60"
+          >
+            Pending Approval
+          </div>
+          <button
+            class="w-full text-left p-3 rounded-2xl hover:bg-surface-variant/30 flex gap-3 transition-all"
+          >
+            <div class="relative flex-shrink-0">
+              <img
+                alt="Marcus Thorne"
+                class="w-12 h-12 rounded-full object-cover"
+                data-alt="A portrait of a male counselor with a friendly and trustworthy look. He is wearing glasses and a professional navy blue shirt. The lighting is soft and natural, suggesting a quiet, focused environment for deep emotional conversation and growth."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgfts2sJsJD1QvPHJHfT_gxPtaaT95epsEqt7gdicoLfKhr6RmpJUhKzYu0E_q6PoSdimVwQpJc7X979DGvESlg68bQoYfO1l0a6824iOBd025678QasW3d2z4ta03FHId6-6SBux0J3zCHT_Iu47BAkX_IeVqlDR0f7T1MNG3Tm9ks6ncdwSIHx3N1KgIwfUVL8xAGVDIZqrUDvPAc5pVv3t7m8nvTHbBlJo6d0x6ISUClj5_jghEbKi1DXg36_hNDU0QdsWr558L"
+              />
+              <span
+                class="absolute bottom-0 right-0 w-3 h-3 bg-on-surface-variant/40 border-2 border-surface-container-low rounded-full"
+              ></span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-start">
+                <span class="font-semibold text-sm truncate"
+                  >Marcus Thorne</span
+                >
+                <span class="text-[10px] text-on-surface-variant font-medium"
+                  >Waitlist</span
+                >
+              </div>
+              <p class="text-xs text-on-surface-variant truncate">
+                Applied Oct 24 • Grief &amp; Loss
+              </p>
+            </div>
+          </button>
+          <!-- History Section -->
+          <div
+            class="mt-6 mb-1 px-2 text-[11px] font-bold uppercase tracking-wider text-on-surface-variant/60"
+          >
+            Session History
+          </div>
+          <div class="space-y-1">
+            <button
+              class="w-full text-left p-3 rounded-2xl hover:bg-surface-variant/30 flex gap-3 transition-all grayscale opacity-70 hover:grayscale-0 hover:opacity-100"
+            >
+              <img
+                alt="Elena Rodriguez"
+                class="w-12 h-12 rounded-full object-cover"
+                data-alt="A professional woman of color in her late 30s with a kind, reassuring smile. She is in a minimalist, modern office with soft-focus books and a small plant. The lighting is warm and comforting, emphasizing a safe and non-judgmental space for mental wellness."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzNyxcRPi4I1t7Lqs_GK7AIyigbgLZoFL7tktH40p7hKTnyARavF7dtmstyaRik-XK_saF_0R1D6Zk8OYPf3p-LJodaFgQDlfj3fzXhFShQxfYPYcVR9s5qwppqkGgA1KBL4LuyeBZCsuh_meOdZb3n9qnv09Xx3tIfhdOvssjS_TovCw3wiYwav5VSzvCqhPuqjhnPTa-Sk-ftpwmTq21XnKwJKTSkh0X9249PRsXnzmrKZkCkamy0OsFQQuqAb9y6neILf0JajvX"
+              />
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-start">
+                  <span class="font-semibold text-sm truncate"
+                    >Elena Rodriguez</span
+                  >
+                  <span class="text-[10px] text-on-surface-variant"
+                    >Oct 12</span
+                  >
+                </div>
+                <p class="text-xs text-on-surface-variant truncate">
+                  12 Sessions completed
+                </p>
+              </div>
+            </button>
+            <button
+              class="w-full text-left p-3 rounded-2xl hover:bg-surface-variant/30 flex gap-3 transition-all grayscale opacity-70 hover:grayscale-0 hover:opacity-100"
+            >
+              <img
+                alt="David Park"
+                class="w-12 h-12 rounded-full object-cover"
+                data-alt="A male psychotherapist with a calm and welcoming presence. He is sitting in a light-filled room with green foliage visible through a window in the background. The visual style is modern, minimalist, and serene, perfect for an app focused on quiet strength."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEEz4deUHwKD5ObNKI4kxJyazs0L89RwKXhV-jdlhuVyCS3mvJxGlSK9o2r29avZCN4Na5DR4NSW6m6QtgUCqtN3ymd5xwqyuKleCt4Z2NpnGe0yZL2zffKDdU88-RpV4XI0b-G4NDKLWYaOE5U_lHdgnUjDm3XR3ZPtA-o9NM0XLZOQ2VU56f0bELNQpRmSBJIQI5HdMRon5tyzkbpOE_9PmmuoFD8p3yUc3wl0xET96tfRvx9FxkDo1wGp5r2QQQcph78oZsPXf0"
+              />
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-start">
+                  <span class="font-semibold text-sm truncate">David Park</span>
+                  <span class="text-[10px] text-on-surface-variant"
+                    >Sep 28</span
+                  >
+                </div>
+                <p class="text-xs text-on-surface-variant truncate">
+                  1 Session completed
+                </p>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-outline-variant/10"></div>
+      </aside>
+      <!-- Main Area: Chat Interface -->
+      <section
+        class="flex-1 flex flex-col bg-surface-container-lowest relative overflow-hidden"
+      >
+        <!-- Chat Header -->
+        <header
+          class="h-16 px-6 border-b border-outline-variant/10 flex items-center justify-between bg-white/40 backdrop-blur-md"
+        >
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-secondary"
+              >verified_user</span
+            >
+            <div>
+              <h3 class="font-bold text-sm leading-tight">
+                Secure Session with Dr. Jenkins
+              </h3>
+              <p
+                class="text-[10px] text-on-surface-variant flex items-center gap-1"
+              >
+                <span
+                  class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"
+                ></span>
+                Encrypted &amp; Private
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <button
+              class="px-6 py-2 text-xs font-bold bg-primary text-on-primary hover:scale-105 active:scale-95 rounded-full transition-all shadow-md"
+            >
+              Start Session
+            </button>
+            <button
+              class="px-4 py-2 text-xs font-bold text-on-surface-variant hover:bg-surface-variant/30 rounded-full transition-colors"
+            >
+              Rate Session
+            </button>
+            <button
+              class="px-4 py-2 text-xs font-bold bg-error/10 text-error hover:bg-error hover:text-white rounded-full transition-all"
+            >
+              End Session
+            </button>
+          </div>
+        </header>
+        <!-- Chat Content Split -->
+        <div class="flex-1 flex overflow-hidden">
+          <!-- Message Thread -->
+          <div class="flex-1 flex flex-col relative">
+            <div class="flex-1 overflow-y-auto p-8 space-y-6 chat-scroll">
+              <!-- Date Divider -->
+              <div class="flex justify-center">
+                <span
+                  class="px-3 py-1 bg-surface-variant/20 rounded-full text-[10px] font-bold text-on-surface-variant/70 uppercase tracking-widest"
+                  >Today</span
+                >
+              </div>
+              <!-- Messages -->
+              <div class="flex gap-4 max-w-2xl">
+                <img
+                  alt="Sarah"
+                  class="w-8 h-8 rounded-full flex-shrink-0"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQHw_FmJA0NTQNh60hmkX_TLuhYhRwxT6YCZC-iWUGxcCPO51mhPJTQNf3Edom45KXwQulyaCkvu8Exl13AWgLCrtcqFPnynzM0D53Zup_DLvErsQh15VbKAhb61V5vlJCGXRu4kXtsORXDLf2GV7SsvrEjq-UzabwZ0xnDsu0CZk1xKezjcTUV-qwAX83X8ctl50eskNNrDZ48Xav9PxN8tuxhsrhbCo2TpiVKk4EHgCOd6iZ3XYGvtvy267FPqauLkQhZBJZqEr_"
+                />
+                <div class="space-y-2">
+                  <div
+                    class="p-4 glass-card rounded-2xl rounded-tl-none shadow-sm text-sm leading-relaxed"
+                  >
+                    Hello! It's good to see you again. How has your week been
+                    since we last talked about the anxiety peaks?
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant ml-1"
+                    >10:42 AM</span
+                  >
+                </div>
+              </div>
+              <div class="flex gap-4 max-w-2xl ml-auto flex-row-reverse">
+                <div
+                  class="h-8 w-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-[10px] font-bold"
+                >
+                  JD
+                </div>
+                <div class="space-y-2 text-right">
+                  <div
+                    class="p-4 bg-primary text-on-primary rounded-2xl rounded-tr-none shadow-md text-sm leading-relaxed"
+                  >
+                    It's been a bit better, but I had a rough Tuesday. I tried
+                    the breathing exercises you suggested.
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant mr-1"
+                    >10:45 AM</span
+                  >
+                </div>
+              </div>
+              <div class="flex gap-4 max-w-2xl">
+                <img
+                  alt="Sarah"
+                  class="w-8 h-8 rounded-full flex-shrink-0"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4781JbBebq-x3o0aRB3L8S9nr8xdYjGwBNoyPLodjBnqs1OvR9UkKlHaNSdWDCZQrmnvmkfo05IUhYtdAlP_aq8sIi3IP6W2cpTR3EkhiyGJ5i6lu2Y84WPJaWj52jIkzyh3HjZo7tf8MwIwwxFp5QuufniP-z-O65NnVEzIk0D1oCgvudMsbnAVDOTBxOciF0sFfZ7PjGTSMQT5vlswnngxv_lZStaalHaAbRetrr6t7eDMWGAMcoph9hAKcFCp_CrhRA9wZDgRk"
+                />
+                <div class="space-y-2">
+                  <div
+                    class="p-4 glass-card rounded-2xl rounded-tl-none shadow-sm text-sm leading-relaxed"
+                  >
+                    I'm glad to hear you used the tools! How did Tuesday feel
+                    compared to previous weeks? Did the breathing help you find
+                    a bit of ground?
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant ml-1"
+                    >10:47 AM</span
+                  >
+                </div>
+              </div>
+              <div class="flex gap-4 max-w-2xl ml-auto flex-row-reverse">
+                <div
+                  class="h-8 w-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-[10px] font-bold"
+                >
+                  JD
+                </div>
+                <div class="space-y-2 text-right">
+                  <div
+                    class="p-4 bg-primary text-on-primary rounded-2xl rounded-tr-none shadow-md text-sm leading-relaxed"
+                  >
+                    It felt... manageable. For the first time, it didn't feel
+                    like I was drowning. Just swimming in rough water.
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant mr-1"
+                    >10:50 AM</span
+                  >
+                </div>
+              </div>
+              <!-- Typing Indicator -->
+              <div class="flex gap-4 max-w-2xl items-center">
+                <img
+                  alt="Sarah"
+                  class="w-8 h-8 rounded-full flex-shrink-0"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIcTuWjUGzFkRGaPccoR4O1568UYcD0F9CF8M7_dHS6swxV5ZHyrEKwaehAL-ub_M94CnlGKFbwLK39ht0ueXyyGwZiUjw3MM8p8iqLvFM84F3ekb2hU1AkAJHZlxWlqcxQY51dDZiGxQiVJ_uW1rt2H5I5RGjhiB0Hhem3Tl0EDJ5AbUsbJkJ2FqGeohVGUHAxDePSXIclHYW4cdSbXr9n4PwPUIEQ6WjlhSU48XHA8MfCgSUEYrxPakcYTFc5jy8sQEDBDs3uEuZ"
+                />
+                <div class="flex gap-1">
+                  <span
+                    class="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce"
+                  ></span>
+                  <span
+                    class="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce [animation-delay:0.2s]"
+                  ></span>
+                  <span
+                    class="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce [animation-delay:0.4s]"
+                  ></span>
+                </div>
+              </div>
+            </div>
+            <!-- Input Field -->
+            <div
+              class="p-6 bg-white/40 backdrop-blur-xl border-t border-outline-variant/10"
+            >
+              <div
+                class="flex items-center gap-3 bg-surface-container-lowest border border-primary/20 rounded-2xl p-2 pr-4 shadow-inner"
+              >
+                <button
+                  class="p-2 text-on-surface-variant hover:text-primary transition-colors"
+                >
+                  <span class="material-symbols-outlined"
+                    >sentiment_satisfied</span
+                  >
+                </button>
+                <button
+                  class="p-2 text-on-surface-variant hover:text-primary transition-colors"
+                >
+                  <span class="material-symbols-outlined">add_circle</span>
+                </button>
+                <input
+                  class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2"
+                  placeholder="Share what's on your mind..."
+                  type="text"
+                />
+                <button
+                  class="w-10 h-10 bg-primary text-on-primary rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
+                >
+                  <span class="material-symbols-outlined">send</span>
+                </button>
+              </div>
+              <p
+                class="text-center text-[10px] text-on-surface-variant/60 mt-3 italic"
+              >
+                A space for quiet strength. Take your time.
+              </p>
+            </div>
+          </div>
+          <!-- Right Side: Coach Info Card -->
+          <aside
+            class="w-80 border-l border-outline-variant/10 bg-surface-container-lowest p-6 hidden lg:block overflow-y-auto chat-scroll"
+          >
+            <div class="glass-card rounded-3xl p-6 mb-6 text-center">
+              <div class="relative inline-block mb-4">
+                <img
+                  alt="Dr. Sarah Jenkins Large"
+                  class="w-24 h-24 rounded-full object-cover mx-auto ring-4 ring-secondary/10"
+                  data-alt="A detailed portrait of Dr. Sarah Jenkins, a professional female therapist with a warm and inviting smile. She has gentle eyes and is set against a soft, sun-drenched minimalist interior background with lush green plants. The aesthetic is clean, calming, and life-affirming, using a palette of soft whites and vibrant forest greens."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq7q-_5DoU9jYukPtGGiNs1J_sFKZm63RIthcWkrJm6sBmMuGV7KonF8Tco41MW2FHWNm0sHEqESiQwXYLcYUHbVdmr0nM-KTsaioTxOi1Ur4LaW2qeUtJPOICkpiqfqXsRSKcxIEOvNM_FlRTGIhPNtNlgJVMLhA_REjZc94d4bzj0YKevnEcvkvde13cCr00ZPCpHu8FELbadvY67bhbBNyWqRQ9v-wMXJHyiX9wMayRkMxtoWjQcswbg3D_3hUpc8xmxMYv6MmO"
+                />
+                <div
+                  class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary p-1 rounded-full border-2 border-white"
+                >
+                  <span
+                    class="material-symbols-outlined text-sm"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >verified</span
+                  >
+                </div>
+              </div>
+              <h4 class="font-headline-md text-lg text-primary">
+                Dr. Sarah Jenkins
+              </h4>
+              <p class="text-xs text-on-surface-variant mb-4">
+                Anxiety &amp; Trauma Specialist
+              </p>
+              <div class="flex justify-center gap-2 mb-4">
+                <span
+                  class="px-2 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-lg uppercase tracking-tight"
+                  >CBT</span
+                >
+                <span
+                  class="px-2 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-lg uppercase tracking-tight"
+                  >Mindfulness</span
+                >
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div class="bg-surface-container-low p-2 rounded-xl">
+                  <span class="block font-bold text-secondary">98%</span>
+                  <span class="text-on-surface-variant/60">Match</span>
+                </div>
+                <div class="bg-surface-container-low p-2 rounded-xl">
+                  <span class="block font-bold text-secondary">150+</span>
+                  <span class="text-on-surface-variant/60">Hours</span>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h5
+                  class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-2"
+                >
+                  Current Focus
+                </h5>
+                <p class="text-xs text-on-surface leading-relaxed">
+                  Working on emotional regulation through breathing techniques
+                  and cognitive reframing.
+                </p>
+              </div>
+              <div>
+                <h5
+                  class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-2"
+                >
+                  Shared Resources
+                </h5>
+                <ul class="space-y-2">
+                  <li
+                    class="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-variant/20 transition-colors cursor-pointer border border-outline-variant/10"
+                  >
+                    <span class="material-symbols-outlined text-primary text-lg"
+                      >description</span
+                    >
+                    <span class="text-xs truncate">Tuesday_Reflection.pdf</span>
+                  </li>
+                  <li
+                    class="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-variant/20 transition-colors cursor-pointer border border-outline-variant/10"
+                  >
+                    <span class="material-symbols-outlined text-primary text-lg"
+                      >audiotrack</span
+                    >
+                    <span class="text-xs truncate">Guided_Breathing.mp3</span>
+                  </li>
+                </ul>
+              </div>
+              <button
+                class="w-full py-2 text-xs font-bold text-secondary border border-secondary/20 rounded-xl hover:bg-secondary/5 transition-colors"
+              >
+                View All History
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <!-- Crisis Ribbon (Persistent) -->
+
+    <!-- Micro-interaction Script -->
+    <script>
+      // Simple micro-interaction for the chat send button
+      document
+        .querySelector("button.bg-primary")
+        .addEventListener("click", function () {
+          const input = this.previousElementSibling;
+          if (input.value.trim() !== "") {
+            const thread = document.querySelector(
+              ".flex-1.overflow-y-auto.p-8",
+            );
+            const newMessage = document.createElement("div");
+            newMessage.className =
+              "flex gap-4 max-w-2xl ml-auto flex-row-reverse animate-in fade-in slide-in-from-bottom-4 duration-300";
+            newMessage.innerHTML = `
+                    <div class="h-8 w-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-[10px] font-bold">JD</div>
+                    <div class="space-y-2 text-right">
+                        <div class="p-4 bg-primary text-on-primary rounded-2xl rounded-tr-none shadow-md text-sm leading-relaxed">
+                            ${input.value}
+                        </div>
+                        <span class="text-[10px] text-on-surface-variant mr-1">Just now</span>
+                    </div>
+                `;
+            thread.appendChild(newMessage);
+            input.value = "";
+            thread.scrollTo({ top: thread.scrollHeight, behavior: "smooth" });
+          }
+        });
+
+      // Trigger on Enter
+      document
+        .querySelector('input[placeholder*="Share what"]')
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            this.nextElementSibling.click();
+          }
+        });
+    </script>
+
+    <div
+      id="snapdom-sandbox"
+      data-snapdom-sandbox="true"
+      aria-hidden="true"
+      style="
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        width: 0px;
+        height: 0px;
+        overflow: hidden;
+      "
+    ></div>
+  </body>
+</html>

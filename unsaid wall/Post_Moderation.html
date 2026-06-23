@@ -1,0 +1,883 @@
+<!doctype html>
+<html class="light" lang="en" style="">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Unsaid Wall | Moderator Queue</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              secondary: "#006a30",
+              "on-tertiary-container": "#005257",
+              background: "#dfffde",
+              "secondary-dim": "#005d29",
+              "outline-variant": "#8eb792",
+              "on-background": "#10361a",
+              surface: "#dfffde",
+              "primary-container": "#7df168",
+              "surface-bright": "#dfffde",
+              "on-primary-fixed-variant": "#006300",
+              "inverse-primary": "#7df168",
+              error: "#b02500",
+              "tertiary-container": "#05ebf9",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#80eb97",
+              "on-tertiary": "#cefbff",
+              "inverse-surface": "#001204",
+              "surface-container-high": "#b9f0be",
+              "on-secondary-fixed": "#004a1f",
+              "surface-container": "#c1f5c5",
+              "secondary-fixed": "#8ef9a4",
+              "on-error-container": "#520c00",
+              "surface-tint": "#006b00",
+              "on-surface": "#10361a",
+              "on-surface-variant": "#3e6444",
+              "surface-container-low": "#cdfdd0",
+              "tertiary-fixed-dim": "#00dbe8",
+              "on-primary-fixed": "#004200",
+              "inverse-on-surface": "#7ea782",
+              "error-dim": "#b92902",
+              "tertiary-dim": "#00595e",
+              "on-secondary": "#ceffd1",
+              "on-primary": "#d3ffc2",
+              "surface-variant": "#b0ebb6",
+              primary: "#006b00",
+              "secondary-container": "#8ef9a4",
+              "primary-dim": "#005d00",
+              "on-secondary-container": "#005f2a",
+              "tertiary-fixed": "#05ebf9",
+              "primary-fixed-dim": "#6fe25b",
+              outline: "#59805e",
+              "on-tertiary-fixed": "#003d41",
+              "on-tertiary-fixed-variant": "#005c62",
+              "on-primary-container": "#005800",
+              "on-error": "#ffefec",
+              "on-secondary-fixed-variant": "#006a30",
+              "surface-container-highest": "#b0ebb6",
+              tertiary: "#00666c",
+              "surface-dim": "#a4e3ac",
+              "primary-fixed": "#7df168",
+              "error-container": "#f95630",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "16px",
+              "container-padding": "24px",
+              "section-gap": "48px",
+              unit: "8px",
+            },
+            fontFamily: {
+              "display-lg-mobile": ["Literata"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-md": ["Literata"],
+              "label-sm": ["Plus Jakarta Sans"],
+              "display-lg": ["Literata"],
+            },
+            fontSize: {
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "500" },
+              ],
+              "label-sm": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "40px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #dfffde;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .glass-card {
+        background: rgba(223, 255, 222, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+
+      .active-tab-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary);
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- Top Navigation Bar -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm shadow-primary/5"
+    >
+      <div
+        class="flex justify-between items-center px-container-padding h-16 max-w-7xl mx-auto"
+      >
+        <div class="flex items-center gap-6">
+          <span
+            class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed"
+            >Unsaid Wall</span
+          >
+          <div
+            class="hidden md:flex items-center gap-6 font-body-md text-body-md"
+          >
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+              href="Community_Wall_User_.html"
+              >Wall</a
+            >
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+              href="Emotion_journal.html"
+              >Journal</a
+            >
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+              href="Coach_Directory.html"
+              >Coaches</a
+            >
+            <a
+              class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+              href="Resource_Library.html"
+              >Resources</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div
+            class="bg-surface-container rounded-full px-4 py-2 flex items-center gap-2 border border-outline-variant/20"
+          >
+            <span
+              class="material-symbols-outlined text-primary"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="bg-transparent border-none focus:ring-0 text-sm w-48"
+              placeholder="Search queue..."
+              type="text"
+            />
+          </div>
+          <button
+            class="flex items-center gap-2 text-primary font-bold active:scale-95 transition-transform"
+          >
+            <span class="material-symbols-outlined" data-icon="account_circle"
+              >account_circle</span
+            >
+            <span class="">Profile</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Side Navigation Bar (Coach Workspace Focus) -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 bg-surface-container dark:bg-surface-container-low shadow-md shadow-primary/5 flex flex-col pt-20 py-4 space-y-2 hidden md:flex"
+    >
+      <div class="px-6 mb-6">
+        <h2 class="font-headline-md text-headline-md text-secondary">
+          Coach Workspace
+        </h2>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">
+          Managing 12 active journeys
+        </p>
+      </div>
+      <nav class="flex-1 px-2 space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all duration-300 rounded-xl mx-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard"
+            >dashboard</span
+          >
+          <span class="font-label-sm text-label-sm">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl mx-2 transition-all duration-300"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="forum"
+            data-weight="fill"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >forum</span
+          >
+          <span class="font-label-sm text-label-sm">Client Wall</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all duration-300 rounded-xl mx-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="history_edu"
+            >history_edu</span
+          >
+          <span class="font-label-sm text-label-sm">Session Logs</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all duration-300 rounded-xl mx-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="leaderboard"
+            >leaderboard</span
+          >
+          <span class="font-label-sm text-label-sm">Analytics</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all duration-300 rounded-xl mx-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="settings"
+            >settings</span
+          >
+          <span class="font-label-sm text-label-sm">Settings</span>
+        </a>
+      </nav>
+      <div class="px-4 mt-auto space-y-2">
+        <div class="pt-4 border-t border-outline-variant/20">
+          <a
+            class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg"
+            href="#"
+          >
+            <span class="material-symbols-outlined" data-icon="help">help</span>
+            <span class="text-xs">Help Center</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg"
+            href="#"
+          >
+            <span class="material-symbols-outlined" data-icon="logout"
+              >logout</span
+            >
+            <span class="text-xs">Sign Out</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main
+      class="md:ml-64 pt-20 px-container-padding pb-section-gap max-w-screen-2xl mx-auto"
+    >
+      <!-- Header & Top Stats -->
+      <header
+        class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4"
+      >
+        <div>
+          <h1 class="font-display-lg text-display-lg text-on-surface mb-2">
+            Post Moderation Queue
+          </h1>
+          <p
+            class="font-body-md text-body-md text-on-surface-variant max-w-2xl"
+          >
+            Review flagged content to ensure the "Unsaid Wall" remains a safe,
+            garden-like space for healing and quiet strength.
+          </p>
+        </div>
+        <div class="flex gap-2">
+          <span
+            class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2"
+          >
+            <span
+              class="material-symbols-outlined text-[18px]"
+              data-icon="pending_actions"
+              >pending_actions</span
+            >
+            42 Pending
+          </span>
+          <span
+            class="bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-[18px]" data-icon="bolt"
+              >bolt</span
+            >
+            Priority Mode
+          </span>
+        </div>
+      </header>
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+        <!-- List View of Flagged Posts -->
+        <div class="xl:col-span-8 space-y-4">
+          <!-- Post Row 1 -->
+          <div
+            class="glass-card rounded-xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all group"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <div class="bg-primary/10 p-2 rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="person_off"
+                    >person_off</span
+                  >
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface">Anonymous #8821</h3>
+                  <div class="flex gap-2 mt-1">
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-error-container text-on-error-container"
+                      >Flagged: Harmful Speech</span
+                    >
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-secondary-container text-on-secondary-container"
+                      >Emotion: Rage</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-on-surface-variant font-mono"
+                  >Flagged 12m ago</span
+                >
+              </div>
+            </div>
+            <p
+              class="font-body-md text-on-surface mb-6 leading-relaxed italic border-l-4 border-primary/20 pl-4"
+            >
+              "I can't believe how everyone just pretends to care. Sometimes I
+              want to just scream at the top of my lungs until the world cracks.
+              You all don't understand the darkness."
+            </p>
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-outline-variant/10"
+            >
+              <div class="flex items-center gap-4">
+                <div class="flex -space-x-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface flex items-center justify-center text-[10px] font-bold"
+                  >
+                    H
+                  </div>
+                  <div
+                    class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface flex items-center justify-center text-[10px] font-bold"
+                  >
+                    L
+                  </div>
+                </div>
+                <span
+                  class="text-xs font-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >User History: 2 Prior Flags</span
+                >
+              </div>
+              <div class="flex gap-2 w-full md:w-auto">
+                <button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-error text-error text-sm font-bold hover:bg-error hover:text-white transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >visibility_off</span
+                  >
+                  Hide</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full bg-primary text-on-primary text-sm font-bold hover:bg-primary-dim transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >check_circle</span
+                  >
+                  Keep</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-secondary text-secondary text-sm font-bold hover:bg-secondary hover:text-white transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >medical_services</span
+                  >
+                  Send Support</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-outline text-on-surface-variant text-sm font-bold hover:bg-surface-variant transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >support_agent</span
+                  >
+                  Assign</button
+                ><button
+                  class="md:flex-none p-2 rounded-full text-error hover:bg-error-container transition-colors"
+                  title="Ban User"
+                >
+                  <span class="material-symbols-outlined">block</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Post Row 2 -->
+          <div
+            class="glass-card rounded-xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all group"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <div class="bg-primary/10 p-2 rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="sentiment_very_dissatisfied"
+                    >sentiment_very_dissatisfied</span
+                  >
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface">Anonymous #9104</h3>
+                  <div class="flex gap-2 mt-1">
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-tertiary-container text-on-tertiary-container"
+                      >Flagged: Self-Harm Risk</span
+                    >
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-secondary-container text-on-secondary-container"
+                      >Emotion: Despair</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-on-surface-variant font-mono"
+                  >Flagged 45m ago</span
+                >
+              </div>
+            </div>
+            <p
+              class="font-body-md text-on-surface mb-6 leading-relaxed italic border-l-4 border-error/20 pl-4"
+            >
+              "There is no light at the end of this tunnel. I'm tired of trying.
+              The wall feels like the only place that doesn't judge, but even
+              here, the silence is too loud."
+            </p>
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-outline-variant/10"
+            >
+              <div class="flex items-center gap-4">
+                <div class="flex -space-x-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-primary-container border-2 border-surface flex items-center justify-center text-[10px] font-bold"
+                  >
+                    N
+                  </div>
+                </div>
+                <span
+                  class="text-xs font-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >User History: New User</span
+                >
+              </div>
+              <div class="flex gap-2 w-full md:w-auto">
+                <button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-error text-error text-sm font-bold hover:bg-error hover:text-white transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >visibility_off</span
+                  >
+                  Hide</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full bg-primary text-on-primary text-sm font-bold hover:bg-primary-dim transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >check_circle</span
+                  >
+                  Keep</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-secondary text-secondary text-sm font-bold hover:bg-secondary hover:text-white transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >medical_services</span
+                  >
+                  Send Support</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-outline text-on-surface-variant text-sm font-bold hover:bg-surface-variant transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >support_agent</span
+                  >
+                  Assign</button
+                ><button
+                  class="md:flex-none p-2 rounded-full text-error hover:bg-error-container transition-colors"
+                  title="Ban User"
+                >
+                  <span class="material-symbols-outlined">block</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Post Row 3 -->
+          <div
+            class="glass-card rounded-xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all group"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <div class="bg-primary/10 p-2 rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="info"
+                    >info</span
+                  >
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface">Anonymous #7231</h3>
+                  <div class="flex gap-2 mt-1">
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-outline-variant/20 text-on-surface-variant"
+                      >Flagged: Spam</span
+                    >
+                    <span
+                      class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-secondary-container text-on-secondary-container"
+                      >Emotion: Neutral</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-on-surface-variant font-mono"
+                  >Flagged 2h ago</span
+                >
+              </div>
+            </div>
+            <p
+              class="font-body-md text-on-surface mb-6 leading-relaxed italic border-l-4 border-primary/20 pl-4"
+            >
+              "Check out this amazing new meditation app that fixed all my
+              problems in 2 days! Link in my bio. #Peace #Healing"
+            </p>
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-outline-variant/10"
+            >
+              <div class="flex items-center gap-4">
+                <div class="flex -space-x-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-error-container border-2 border-surface flex items-center justify-center text-[10px] font-bold"
+                  >
+                    S
+                  </div>
+                  <div
+                    class="w-8 h-8 rounded-full bg-error-container border-2 border-surface flex items-center justify-center text-[10px] font-bold"
+                  >
+                    B
+                  </div>
+                </div>
+                <span
+                  class="text-xs font-label-sm text-on-surface-variant uppercase tracking-widest text-error"
+                  >User History: Flagged for Spam 4x</span
+                >
+              </div>
+              <div class="flex gap-2 w-full md:w-auto">
+                <button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-error text-error text-sm font-bold hover:bg-error hover:text-white transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >visibility_off</span
+                  >
+                  Hide</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full bg-primary text-on-primary text-sm font-bold hover:bg-primary-dim transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >check_circle</span
+                  >
+                  Keep</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-secondary text-secondary text-sm font-bold hover:bg-secondary hover:text-white transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >medical_services</span
+                  >
+                  Send Support</button
+                ><button
+                  class="flex-1 md:flex-none px-4 py-2 rounded-full border border-outline text-on-surface-variant text-sm font-bold hover:bg-surface-variant transition-colors flex items-center justify-center gap-1"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >support_agent</span
+                  >
+                  Assign</button
+                ><button
+                  class="md:flex-none p-2 rounded-full text-error hover:bg-error-container transition-colors"
+                  title="Ban User"
+                >
+                  <span class="material-symbols-outlined">block</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Sidebar: Queue Health & Action Log -->
+        <aside class="xl:col-span-4 space-y-6">
+          <!-- Queue Health Stats -->
+          <div
+            class="glass-card rounded-xl p-6 border border-outline-variant/30 shadow-sm"
+          >
+            <h2
+              class="font-headline-md text-headline-md text-secondary mb-4 flex items-center gap-2"
+            >
+              <span
+                class="material-symbols-outlined"
+                data-icon="health_and_safety"
+                >health_and_safety</span
+              >
+              Queue Health
+            </h2>
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between items-end mb-2">
+                  <span
+                    class="text-xs font-label-sm uppercase tracking-widest text-on-surface-variant"
+                    >Avg Response Time</span
+                  >
+                  <span class="text-xl font-bold text-primary">14m 20s</span>
+                </div>
+                <div
+                  class="w-full bg-surface-container rounded-full h-2 overflow-hidden"
+                >
+                  <div
+                    class="bg-primary h-full rounded-full"
+                    style="width: 78%"
+                  ></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-1">
+                  Faster than 92% of platforms (Target: &lt;15m)
+                </p>
+              </div>
+              <div>
+                <div class="flex justify-between items-end mb-2">
+                  <span
+                    class="text-xs font-label-sm uppercase tracking-widest text-on-surface-variant"
+                    >Safety Score</span
+                  >
+                  <span class="text-xl font-bold text-secondary">98.4%</span>
+                </div>
+                <div
+                  class="w-full bg-surface-container rounded-full h-2 overflow-hidden"
+                >
+                  <div
+                    class="bg-secondary h-full rounded-full"
+                    style="width: 98.4%"
+                  ></div>
+                </div>
+                <p class="text-[10px] text-on-surface-variant mt-1">
+                  Quiet Strength Index is Optimal
+                </p>
+              </div>
+              <div
+                class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/10"
+              >
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-on-surface">1,240</div>
+                  <div
+                    class="text-[10px] uppercase font-bold text-on-surface-variant"
+                  >
+                    Today Total
+                  </div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-error">42</div>
+                  <div
+                    class="text-[10px] uppercase font-bold text-on-surface-variant"
+                  >
+                    Unresolved
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Action Log -->
+          <div
+            class="glass-card rounded-xl p-6 border border-outline-variant/30 shadow-sm"
+          >
+            <h2
+              class="font-headline-md text-headline-md text-secondary mb-4 flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined" data-icon="history"
+                >history</span
+              >
+              Action Log
+            </h2>
+            <div
+              class="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+            >
+              <div
+                class="flex gap-3 text-sm border-l-2 border-primary pl-3 py-1"
+              >
+                <div class="flex-1">
+                  <p class="text-on-surface">
+                    <span class="font-bold">Moderator Sarah</span> kept Post
+                    #7821
+                  </p>
+                  <span class="text-[10px] text-on-surface-variant"
+                    >2 mins ago • Reason: Expression of grief</span
+                  >
+                </div>
+              </div>
+              <div class="flex gap-3 text-sm border-l-2 border-error pl-3 py-1">
+                <div class="flex-1">
+                  <p class="text-on-surface">
+                    <span class="font-bold">Moderator John</span> hid Post #9921
+                  </p>
+                  <span class="text-[10px] text-on-surface-variant"
+                    >14 mins ago • Reason: Triggering Content</span
+                  >
+                </div>
+              </div>
+              <div
+                class="flex gap-3 text-sm border-l-2 border-tertiary pl-3 py-1"
+              >
+                <div class="flex-1">
+                  <p class="text-on-surface">
+                    <span class="font-bold">System</span> flagged Post #0012
+                  </p>
+                  <span class="text-[10px] text-on-surface-variant"
+                    >22 mins ago • Auto-Detection: Spam</span
+                  >
+                </div>
+              </div>
+              <div
+                class="flex gap-3 text-sm border-l-2 border-secondary pl-3 py-1"
+              >
+                <div class="flex-1">
+                  <p class="text-on-surface">
+                    <span class="font-bold">Moderator Sarah</span> assigned Post
+                    #9104
+                  </p>
+                  <span class="text-[10px] text-on-surface-variant"
+                    >25 mins ago • To: Crisis Coach #4</span
+                  >
+                </div>
+              </div>
+              <div
+                class="flex gap-3 text-sm border-l-2 border-outline-variant pl-3 py-1"
+              >
+                <div class="flex-1">
+                  <p class="text-on-surface">
+                    <span class="font-bold">Moderator John</span> updated
+                    settings
+                  </p>
+                  <span class="text-[10px] text-on-surface-variant"
+                    >1 hour ago • Auto-filter sensitivity +5%</span
+                  >
+                </div>
+              </div>
+            </div>
+            <button
+              class="w-full mt-6 text-primary text-sm font-bold flex items-center justify-center gap-1 hover:underline"
+            >
+              View Full History
+              <span
+                class="material-symbols-outlined text-[16px]"
+                data-icon="arrow_forward"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+          <!-- Visual Atmosphere: Abstract Garden Texture -->
+          <div class="relative h-40 rounded-xl overflow-hidden shadow-inner">
+            <img
+              class="w-full h-full object-cover opacity-60"
+              data-alt="A macro shot of vibrant green moss and tiny dew drops catching sunlight in a dense, primeval forest. The lighting is ethereal and soft, casting gentle shadows that create a deep sense of layered organic depth. The overall aesthetic is one of lush vitality and serene growth, perfectly echoing the quiet strength of the design system's garden-inspired identity."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfS5Tr7KpAtKhkS_0QokN347bdIQya6uT7du2WGpjsD-RJVU-y_TyK2WAaclnGo6bPDTqHJJqDMNcNiE9-l40LVLR7lgzs1ILF2BofHEzeM3PNHzaInTCOUCbvpR0CqgkkBir63QUttI-eJ1cjBR0XWQONkvt6OeXmWYr_M15IlbrMJ9DLUHW5guDwxKyRKRzPtxMBY5IgtWbdq6sUua0DEVa-9tKOE0MINJ-qXttYaV-apAuXibJQ9CSNW-CTALAtUv2_H-rFY9uV"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-background to-transparent"
+            ></div>
+            <div class="absolute bottom-4 left-4">
+              <p
+                class="text-xs font-bold text-secondary uppercase tracking-widest"
+              >
+                Environment Status
+              </p>
+              <p class="text-lg font-display-lg text-on-surface">
+                Garden Lush &amp; Safe
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <!-- Crisis Ribbon (Fixed) -->
+
+    <!-- Footer -->
+    <footer
+      class="md:ml-64 bg-surface-container-highest dark:bg-surface-dim border-t border-outline-variant/20 w-full py-12 px-container-padding"
+    >
+      <div
+        class="mt-12 pt-8 border-t border-outline-variant/10 text-center text-on-surface-variant font-label-sm text-label-sm"
+      >
+        © 2024 Unsaid Wall. A space for quiet strength.
+      </div>
+    </footer>
+    <script>
+      // Micro-interaction for hover effect on action buttons
+      document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("mousedown", () => {
+          button.classList.add("scale-95");
+        });
+        button.addEventListener("mouseup", () => {
+          button.classList.remove("scale-95");
+        });
+        button.addEventListener("mouseleave", () => {
+          button.classList.remove("scale-95");
+        });
+      });
+
+      // Simulating auto-refresh for the queue
+      setInterval(() => {
+        const pendingLabel = document.querySelector(
+          ".bg-primary-container span",
+        );
+        if (pendingLabel) {
+          let current = parseInt(pendingLabel.innerText);
+          if (Math.random() > 0.8) {
+            pendingLabel.innerHTML = `<span class="material-symbols-outlined text-[18px]">pending_actions</span> ${current + 1} Pending`;
+          }
+        }
+      }, 30000);
+    </script>
+  </body>
+</html>

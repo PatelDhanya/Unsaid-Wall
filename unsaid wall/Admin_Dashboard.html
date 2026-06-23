@@ -1,0 +1,764 @@
+<!doctype html>
+
+<html class="light" lang="en" style>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Unsaid Wall | Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Literata:opsz,wght@7..72,400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              secondary: "#006a30",
+              "on-tertiary-container": "#005257",
+              background: "#dfffde",
+              "secondary-dim": "#005d29",
+              "outline-variant": "#8eb792",
+              "on-background": "#10361a",
+              surface: "#dfffde",
+              "primary-container": "#7df168",
+              "surface-bright": "#dfffde",
+              "on-primary-fixed-variant": "#006300",
+              "inverse-primary": "#7df168",
+              error: "#b02500",
+              "tertiary-container": "#05ebf9",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#80eb97",
+              "on-tertiary": "#cefbff",
+              "inverse-surface": "#001204",
+              "surface-container-high": "#b9f0be",
+              "on-secondary-fixed": "#004a1f",
+              "surface-container": "#c1f5c5",
+              "secondary-fixed": "#8ef9a4",
+              "on-error-container": "#520c00",
+              "surface-tint": "#006b00",
+              "on-surface": "#10361a",
+              "on-surface-variant": "#3e6444",
+              "surface-container-low": "#cdfdd0",
+              "tertiary-fixed-dim": "#00dbe8",
+              "on-primary-fixed": "#004200",
+              "inverse-on-surface": "#7ea782",
+              "error-dim": "#b92902",
+              "tertiary-dim": "#00595e",
+              "on-secondary": "#ceffd1",
+              "on-primary": "#d3ffc2",
+              "surface-variant": "#b0ebb6",
+              primary: "#006b00",
+              "secondary-container": "#8ef9a4",
+              "primary-dim": "#005d00",
+              "on-secondary-container": "#005f2a",
+              "tertiary-fixed": "#05ebf9",
+              "primary-fixed-dim": "#6fe25b",
+              outline: "#59805e",
+              "on-tertiary-fixed": "#003d41",
+              "on-tertiary-fixed-variant": "#005c62",
+              "on-primary-container": "#005800",
+              "on-error": "#ffefec",
+              "on-secondary-fixed-variant": "#006a30",
+              "surface-container-highest": "#b0ebb6",
+              tertiary: "#00666c",
+              "surface-dim": "#a4e3ac",
+              "primary-fixed": "#7df168",
+              "error-container": "#f95630",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "16px",
+              "container-padding": "24px",
+              "section-gap": "48px",
+              unit: "8px",
+            },
+            fontFamily: {
+              "display-lg-mobile": ["Literata"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-md": ["Literata"],
+              "label-sm": ["Plus Jakarta Sans"],
+              "display-lg": ["Literata"],
+            },
+            fontSize: {
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "500" },
+              ],
+              "label-sm": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "40px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+
+      .glass-panel {
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+
+      .crisis-glow {
+        box-shadow: 0 0 20px rgba(176, 37, 0, 0.15);
+      }
+
+      body {
+        background: radial-gradient(circle at 0% 0%, #cdfdd0 0%, #dfffde 100%);
+        min-height: 100vh;
+      }
+
+      .vibe-bar {
+        transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    </style>
+  </head>
+
+  <body class="font-body-md text-on-surface antialiased overflow-x-hidden">
+    <!-- Side Navigation Bar -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 bg-surface-container dark:bg-surface-container-low flex flex-col h-full py-4 space-y-2 z-50 shadow-md shadow-primary/5 pt-12"
+    >
+      <div class="px-6 py-6 mb-4">
+        <h1 class="font-headline-md text-headline-md text-secondary">
+          Admin Workspace
+        </h1>
+        <p class="text-on-surface-variant font-label-sm text-label-sm">
+          Managing 12 active journeys
+        </p>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl mx-2 flex items-center px-4 py-3 transition-all duration-300 ease-in-out"
+          href="Admin_Dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-3">dashboard</span>
+          <span class="font-label-sm text-label-sm">Dashboard</span>
+        </a>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant mx-2 flex items-center px-4 py-3 transition-all duration-300 ease-in-out"
+          href="Community_Wall_User_.html"
+        >
+          <span class="material-symbols-outlined mr-3">forum</span>
+          <span class="font-label-sm text-label-sm">Client Wall</span>
+        </a>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant mx-2 flex items-center px-4 py-3 transition-all duration-300 ease-in-out"
+          href="Post_Moderation.html"
+        >
+          <span class="material-symbols-outlined mr-3">history_edu</span>
+          <span class="font-label-sm text-label-sm">Session Logs</span>
+        </a>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant mx-2 flex items-center px-4 py-3 transition-all duration-300 ease-in-out"
+          href="Admin_Dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-3">leaderboard</span>
+          <span class="font-label-sm text-label-sm">Analytics</span>
+        </a>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant mx-2 flex items-center px-4 py-3 transition-all duration-300 ease-in-out"
+          href="Identity.html"
+        >
+          <span class="material-symbols-outlined mr-3">settings</span>
+          <span class="font-label-sm text-label-sm">Settings</span>
+        </a>
+      </nav>
+      <div class="pt-4 border-t border-outline-variant/10">
+        <a
+          class="text-on-surface-variant hover:bg-surface-variant mx-2 flex items-center px-4 py-3 rounded-xl transition-all"
+          href="Resource_Library.html"
+        >
+          <span class="material-symbols-outlined mr-3">help</span>
+          <span class="font-label-sm text-label-sm">Help Center</span>
+        </a>
+        <a
+          class="text-on-surface-variant hover:bg-surface-variant mx-2 flex items-center px-4 py-3 rounded-xl transition-all"
+          href="Landing.html"
+        >
+          <span class="material-symbols-outlined mr-3">logout</span>
+          <span class="font-label-sm text-label-sm">Sign Out</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 pt-20 px-container-padding pb-section-gap">
+      <!-- Header Row -->
+      <header class="flex justify-between items-end mb-10">
+        <div>
+          <h2 class="font-display-lg text-display-lg text-primary">
+            Platform Overview
+          </h2>
+          <p class="text-on-surface-variant font-body-md mt-2">
+            Real-time health monitoring &amp; administrative control.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <button
+            class="bg-primary text-on-primary px-6 py-3 rounded-full flex items-center gap-2 font-bold transition-all hover:brightness-110 active:scale-95"
+          >
+            <span class="material-symbols-outlined">campaign</span>
+            Broadcast Tool
+          </button>
+          <div
+            class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20"
+          >
+            <img
+              alt="Admin Avatar"
+              class="w-full h-full object-cover"
+              data-alt="A professional headshot of a mature administrative director with a calm and welcoming expression. The lighting is soft and natural, typical of a bright office setting. The background is a slightly blurred modern architectural space with green plants, maintaining a serene and clinical-yet-warm aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl3F6qPzoXfe2w4-D88uz6J_tSlsVuNX1v0jO-qfMXmwDehoaBPqp-Phf7SGqAgWAikmJGqUHxms1qKw5FhP0sPrBfotqlVJVsXchKrKsFdZkyMT5Tkk49bPGXivCA32aLc3qwPo-JtqqiUbhb-pb9KZmCXez9lLLMtnQlnYLtAe0j5fJlibEjK-26qNLvlrf98pN3LogJy7OwqgKrJ7lvBwdu_9Ttn916l1ajAM3lWxBjok5zj0I_ZBuVETFyP4Zmp-QWFb7iXRnw"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Stats Top Row -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-12"
+      >
+        <div
+          class="glass-panel bg-surface-container-lowest/80 p-6 rounded-lg border border-outline-variant/10 shadow-sm shadow-primary/5"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <span
+              class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+              >Active Sessions</span
+            >
+            <span class="material-symbols-outlined text-primary">groups</span>
+          </div>
+          <div class="text-4xl font-bold text-primary">1,482</div>
+          <div class="mt-2 text-primary-dim text-sm flex items-center">
+            <span class="material-symbols-outlined text-sm mr-1"
+              >trending_up</span
+            >
+            +12% from last hour
+          </div>
+        </div>
+        <div
+          class="glass-panel bg-surface-container-lowest/80 p-6 rounded-lg border border-outline-variant/10 shadow-sm shadow-primary/5"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <span
+              class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+              >Posts Today</span
+            >
+            <span class="material-symbols-outlined text-tertiary">forum</span>
+          </div>
+          <div class="text-4xl font-bold text-tertiary">1,482</div>
+          <div class="mt-2 text-tertiary-dim text-sm flex items-center">
+            <span class="material-symbols-outlined text-sm mr-1"
+              >trending_up</span
+            >
+            +12% from last hour
+          </div>
+        </div>
+        <div
+          class="glass-panel bg-surface-container-lowest/80 p-6 rounded-lg border border-outline-variant/10 shadow-sm shadow-primary/5"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <span
+              class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+              >Emotion Distribution</span
+            >
+            <span class="material-symbols-outlined text-secondary"
+              >analytics</span
+            >
+          </div>
+          <div class="space-y-3">
+            <div class="flex h-4 w-full rounded-full overflow-hidden">
+              <div
+                class="bg-primary h-full"
+                style="width: 30%"
+                title="Hope: 30%"
+              ></div>
+              <div
+                class="bg-tertiary h-full"
+                style="width: 25%"
+                title="Calm: 25%"
+              ></div>
+              <div
+                class="bg-secondary h-full"
+                style="width: 20%"
+                title="Resilience: 20%"
+              ></div>
+              <div
+                class="bg-error/40 h-full"
+                style="width: 15%"
+                title="Distress: 15%"
+              ></div>
+              <div
+                class="bg-surface-variant h-full"
+                style="width: 10%"
+                title="Growth: 10%"
+              ></div>
+            </div>
+            <div
+              class="flex justify-between text-[8px] font-bold uppercase tracking-tighter text-on-surface-variant"
+            >
+              <span>Hope 30%</span>
+              <span>Calm 25%</span>
+              <span>Resilience 20%</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-outline-variant/10">
+            <p class="text-[10px] text-on-surface-variant leading-tight">
+              Breakdown of current community emotional state.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Middle Section: Active Crisis Alerts -->
+      <section class="mb-12">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            Active Crisis Alerts
+          </h3>
+          <span
+            class="px-3 py-1 bg-error-container text-on-error-container rounded-full text-xs font-bold animate-pulse"
+            >4 HIGH PRIORITY</span
+          >
+        </div>
+        <div class="space-y-4 max-w-5xl">
+          <!-- Crisis Alert Card 1 -->
+          <div
+            class="crisis-glow glass-panel bg-surface-container-lowest/90 p-6 rounded-lg border-l-4 border-error flex items-start justify-between"
+          >
+            <div class="flex gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-on-error-container shrink-0"
+              >
+                <span class="material-symbols-outlined">warning</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <h4 class="font-bold text-lg">User_8291 (The Wall)</h4>
+                  <span
+                    class="px-2 py-0.5 bg-error text-white text-[10px] font-bold rounded uppercase"
+                    >Flag: Self-Harm</span
+                  >
+                </div>
+                <p class="text-on-surface-variant italic mb-3">
+                  "I just don't see the light at the end of this tunnel anymore,
+                  the quiet is too heavy..."
+                </p>
+                <div
+                  class="flex gap-4 text-xs font-medium text-on-surface-variant"
+                >
+                  <span class="flex items-center gap-1"
+                    ><span class="material-symbols-outlined text-sm"
+                      >schedule</span
+                    >
+                    2 mins ago</span
+                  >
+                  <span class="flex items-center gap-1"
+                    ><span class="material-symbols-outlined text-sm"
+                      >location_on</span
+                    >
+                    US East</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <button
+                class="bg-error text-on-error px-4 py-2 rounded-full text-sm font-bold"
+              >
+                Intervene Now
+              </button>
+              <button
+                class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-full text-sm font-medium"
+              >
+                Dismiss (False Positive)
+              </button>
+            </div>
+          </div>
+          <!-- Crisis Alert Card 2 -->
+          <div
+            class="glass-panel bg-surface-container-lowest/80 p-6 rounded-lg border-l-4 border-secondary/40 flex items-start justify-between"
+          >
+            <div class="flex gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0"
+              >
+                <span class="material-symbols-outlined">priority_high</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <h4 class="font-bold text-lg">Journal Entry #AF-22</h4>
+                  <span
+                    class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded uppercase"
+                    >Flag: Anxiety Spike</span
+                  >
+                </div>
+                <p class="text-on-surface-variant italic mb-3">
+                  Keyword density high for 'chest pain', 'cannot breathe'.
+                  Cognitive analysis suggests panic attack.
+                </p>
+                <div
+                  class="flex gap-4 text-xs font-medium text-on-surface-variant"
+                >
+                  <span class="flex items-center gap-1"
+                    ><span class="material-symbols-outlined text-sm"
+                      >schedule</span
+                    >
+                    14 mins ago</span
+                  >
+                  <span class="flex items-center gap-1"
+                    ><span class="material-symbols-outlined text-sm"
+                      >psychology</span
+                    >
+                    Coach Alert Sent</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <button
+                class="bg-secondary text-on-secondary px-4 py-2 rounded-full text-sm font-bold"
+              >
+                Deploy Breathing Tool
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Bottom Section: Grid Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+        <!-- Pending Coaches List -->
+        <section
+          class="glass-panel bg-surface-container-lowest/80 p-8 rounded-lg border border-outline-variant/10"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="font-headline-md text-headline-md">Pending Coaches</h3>
+            <a class="text-primary text-sm font-bold underline" href="#"
+              >View All (18)</a
+            >
+            <button
+              class="bg-primary text-on-primary px-4 py-2 rounded-full flex items-center gap-2 font-bold text-sm transition-all hover:brightness-110 active:scale-95 ml-auto mr-4"
+            >
+              <span class="material-symbols-outlined text-sm">person_add</span
+              >Invite Coach
+            </button>
+          </div>
+          <div class="space-y-6">
+            <!-- Applicant 1 -->
+            <div class="flex items-center justify-between group">
+              <div class="flex items-center gap-4">
+                <img
+                  alt="Applicant 1"
+                  class="w-12 h-12 rounded-full object-cover"
+                  data-alt="A portrait of a professional female mental health practitioner in her 30s. She is smiling warmly with kind eyes, wearing a simple linen top. The aesthetic is clean, soft, and minimalist, with bright natural lighting that suggests a serene clinical environment."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOBCZviZZXD6L0U6x3jk4JCq_auon3aaa5C1OVjR4okk254UMheb-B3VQ24UDh5lHv5p7CMgTCTQyMOBXHCU8teNSSVXz-dfq1OXOnN-R5OEx6GfJ2uAyvMK__9DU5_NxrIF84cfMT1DDZNWoRqfAOXHviT7Z8cl4CfnH2UxOeyZREfvbsLMNGz5JAz1sRNMdJeNy8mlna4J3O8b56rRtTZbjlZDJNkvuL60chqHlxMyvuVZQ_u_Eo-6UwaEL4zY-BLrBfu5xAG4ZC"
+                />
+                <div>
+                  <div class="font-bold">Dr. Elena Rostova</div>
+                  <div class="text-xs text-on-surface-variant">
+                    Trauma Specialist • 12 yrs exp.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <button
+                  class="p-2 bg-primary-container text-on-primary-container rounded-full"
+                >
+                  <span class="material-symbols-outlined">check</span>
+                </button>
+                <button
+                  class="p-2 bg-error-container text-on-error-container rounded-full"
+                >
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </div>
+            </div>
+            <!-- Applicant 2 -->
+            <div class="flex items-center justify-between group">
+              <div class="flex items-center gap-4">
+                <img
+                  alt="Applicant 2"
+                  class="w-12 h-12 rounded-full object-cover"
+                  data-alt="A portrait of a male mental health coach in a professional setting. He has a calm, thoughtful expression, wearing a dark green sweater that matches the garden-like color palette of the brand. Soft side lighting creates a peaceful, authentic mood."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG8rDiGhvKTIX1Iu9YTDMK4aKEKyIp26aj3UJeUMAw0nKJAPl1E6o_Ig9Vvb-K1w6yNSc4f1FqyRSiYhWh0UdKzDOA7xw729TBJ8aidbBCyhlGiV65tKDBJ7AIXi6-0HZlAR8Hmt4bXnHHgiAqojRPFs_4hJKHY1Bm6PvicjDSNJDwgOy_Z2Ipy27kqgA_APnyP5-mkWjDyU4bKsOVRdO1TkSp3NzXm08pGyRkxDrnHT8gR7_wty6Y4KIiwj0V9uJ4B5EbgxdxPesy"
+                />
+                <div>
+                  <div class="font-bold">Marcus Thorne</div>
+                  <div class="text-xs text-on-surface-variant">
+                    Cognitive Behavioral • 8 yrs exp.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <button
+                  class="p-2 bg-primary-container text-on-primary-container rounded-full"
+                >
+                  <span class="material-symbols-outlined">check</span>
+                </button>
+                <button
+                  class="p-2 bg-error-container text-on-error-container rounded-full"
+                >
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </div>
+            </div>
+            <!-- Applicant 3 -->
+            <div class="flex items-center justify-between group">
+              <div class="flex items-center gap-4">
+                <img
+                  alt="Applicant 3"
+                  class="w-12 h-12 rounded-full object-cover"
+                  data-alt="A portrait of a diverse female wellness expert with a peaceful smile. She is wearing a soft cream-colored sweater. The background is a soft-focus interior with green botanical elements, consistent with the vibrant and life-affirming aesthetic of the platform."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbQZLYvPokMQNvWjwy6r53j-cy0WjS6ubQUDjOwgIE2CpX2vTcEdNm2qcHQS-Y51zuQxEshzWXGJLl8hu8tAz_npoIv163eTHJkFo5kiq6qj-TokgqXf_ILdQti567t_iaZNHnoJKPmkLEpNdkUN-D8K5xwir_-0T6Fx5EJCDCx2FKKbNMkPcl_bdG3wlB1XaIhf8mGiQagtCZqzUgD27wYl1HVlWJ9X6HTH9ecYozJMfaBAyDXxzWPVI-ahaRM4hCD7r0xfxsVGEq"
+                />
+                <div>
+                  <div class="font-bold">Sarah Jenkins</div>
+                  <div class="text-xs text-on-surface-variant">
+                    Mindfulness Coach • 5 yrs exp.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <button
+                  class="p-2 bg-primary-container text-on-primary-container rounded-full"
+                >
+                  <span class="material-symbols-outlined">check</span>
+                </button>
+                <button
+                  class="p-2 bg-error-container text-on-error-container rounded-full"
+                >
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Community Vibe Chart -->
+        <section
+          class="glass-panel bg-surface-container-highest/60 p-8 rounded-lg border border-outline-variant/10 relative overflow-hidden"
+        >
+          <div class="mb-6">
+            <h3 class="font-headline-md text-headline-md">Community Vibe</h3>
+            <p class="text-on-surface-variant text-sm">
+              Real-time aggregate emotional tone
+            </p>
+          </div>
+          <div class="flex items-end justify-between h-48 gap-4 px-4">
+            <div class="flex-1 flex flex-col items-center">
+              <div
+                class="vibe-bar w-full bg-primary rounded-t-lg"
+                style="height: 65%"
+              ></div>
+              <span
+                class="text-[10px] mt-2 font-bold uppercase tracking-tighter"
+                >Hope</span
+              >
+            </div>
+            <div class="flex-1 flex flex-col items-center">
+              <div
+                class="vibe-bar w-full bg-tertiary rounded-t-lg"
+                style="height: 40%"
+              ></div>
+              <span
+                class="text-[10px] mt-2 font-bold uppercase tracking-tighter"
+                >Calm</span
+              >
+            </div>
+            <div class="flex-1 flex flex-col items-center">
+              <div
+                class="vibe-bar w-full bg-secondary rounded-t-lg"
+                style="height: 85%"
+              ></div>
+              <span
+                class="text-[10px] mt-2 font-bold uppercase tracking-tighter"
+                >Resilience</span
+              >
+            </div>
+            <div class="flex-1 flex flex-col items-center">
+              <div
+                class="vibe-bar w-full bg-error rounded-t-lg opacity-40"
+                style="height: 25%"
+              ></div>
+              <span
+                class="text-[10px] mt-2 font-bold uppercase tracking-tighter"
+                >Distress</span
+              >
+            </div>
+            <div class="flex-1 flex flex-col items-center">
+              <div
+                class="vibe-bar w-full bg-surface-variant rounded-t-lg"
+                style="height: 55%"
+              ></div>
+              <span
+                class="text-[10px] mt-2 font-bold uppercase tracking-tighter"
+                >Growth</span
+              >
+            </div>
+          </div>
+          <div class="mt-8 flex items-center gap-4 p-4 bg-white/20 rounded-xl">
+            <span
+              class="material-symbols-outlined text-primary"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >eco</span
+            >
+            <p class="text-xs text-on-surface font-medium leading-relaxed">
+              Overall sentiment is
+              <span class="font-bold text-primary">Strongly Positive</span>.
+              Growth metrics increased by 14% since the morning broadcast.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="ml-64 w-[calc(100%-16rem)] py-12 px-container-padding bg-surface-container-highest dark:bg-surface-dim border-t border-outline-variant/20"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-start gap-gutter max-w-7xl mx-auto"
+      >
+        <div>
+          <h3
+            class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2"
+          >
+            Unsaid Wall
+          </h3>
+          <p class="text-on-surface-variant font-body-md">
+            A space for quiet strength.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-8">
+          <div class="flex flex-col gap-2">
+            <span
+              class="font-bold text-sm uppercase tracking-widest text-primary"
+              >Platform</span
+            >
+            <a
+              class="text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Crisis Support</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Privacy Policy</a
+            >
+          </div>
+          <div class="flex flex-col gap-2">
+            <span
+              class="font-bold text-sm uppercase tracking-widest text-primary"
+              >Connect</span
+            >
+            <a
+              class="text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Terms of Service</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-on-surface transition-colors"
+              href="#"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-7xl mx-auto mt-12 text-sm text-on-surface-variant flex justify-between items-center"
+      >
+        <span class="">© 2026 Unsaid Wall. All rights reserved.</span>
+        <div class="flex gap-4">
+          <span class="material-symbols-outlined">shield_moon</span>
+          <span class="material-symbols-outlined">psychology</span>
+          <span class="material-symbols-outlined">cloud_done</span>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Micro-interactions for bars animation
+      window.addEventListener("DOMContentLoaded", () => {
+        const bars = document.querySelectorAll(".vibe-bar");
+        bars.forEach((bar) => {
+          const targetHeight = bar.style.height;
+          bar.style.height = "0%";
+          setTimeout(() => {
+            bar.style.height = targetHeight;
+          }, 300);
+        });
+      });
+
+      // Broadcast button click simulation
+      document
+        .querySelector('button:contains("Broadcast Tool")')
+        ?.addEventListener("click", () => {
+          alert("Opening Broadcast Interface... Prepare global announcement.");
+        });
+
+      // Custom contains selector helper
+      window.onload = function () {
+        const btns = document.getElementsByTagName("button");
+        for (let btn of btns) {
+          if (btn.innerText.includes("Broadcast Tool")) {
+            btn.onclick = () => {
+              btn.classList.add("scale-95", "brightness-125");
+              setTimeout(
+                () => btn.classList.remove("scale-95", "brightness-125"),
+                150,
+              );
+            };
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

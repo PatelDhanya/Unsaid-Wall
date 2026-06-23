@@ -1,0 +1,374 @@
+<!doctype html>
+<html class="light" lang="en" style="">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+      name="viewport"
+    />
+    <title>Unsaid Wall - Choose Your Identity</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+      }
+
+      body {
+        -webkit-tap-highlight-color: transparent;
+        scroll-behavior: smooth;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      .shimmer {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#7ea782",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#6fe25b",
+              "on-secondary-container": "#005f2a",
+              "tertiary-fixed-dim": "#00dbe8",
+              "surface-container-highest": "#b0ebb6",
+              primary: "#006b00",
+              "surface-container-low": "#cdfdd0",
+              "secondary-container": "#8ef9a4",
+              "on-tertiary-fixed-variant": "#005c62",
+              "on-secondary": "#ceffd1",
+              tertiary: "#00666c",
+              "on-error": "#ffefec",
+              "primary-dim": "#005d00",
+              "on-surface-variant": "#3e6444",
+              "primary-container": "#7df168",
+              "tertiary-container": "#05ebf9",
+              "outline-variant": "#8eb792",
+              "on-primary-container": "#005800",
+              secondary: "#006a30",
+              "on-secondary-container": "#005f2a",
+              "on-error-container": "#520c00",
+              error: "#b02500",
+              background: "#dfffde",
+              surface: "#dfffde",
+              "on-surface": "#10361a",
+              "surface-container": "#c1f5c5",
+              outline: "#59805e",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              "section-gap": "48px",
+              "container-padding": "24px",
+              unit: "8px",
+              gutter: "16px",
+            },
+            fontFamily: {
+              "label-sm": ["Plus Jakarta Sans"],
+              "headline-md": ["Literata"],
+              "display-lg": ["Literata"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "display-lg-mobile": ["Literata"],
+            },
+            fontSize: {
+              "label-sm": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "500" },
+              ],
+              "display-lg": [
+                "40px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="bg-background text-on-surface font-body-md min-h-screen selection:bg-primary-container"
+  >
+    <!-- TopAppBar -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-md shadow-[0px_4px_20px_rgba(5,139,3,0.05)] h-16"
+    >
+      <div
+        class="flex items-center justify-between px-container-padding h-full w-full max-w-720 mx-auto"
+      >
+        <div
+          class="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
+        >
+          <span class="material-symbols-outlined text-primary" data-icon="spa"
+            >spa</span
+          >
+        </div>
+        <h1
+          class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tight"
+        >
+          Unsaid Wall
+        </h1>
+        <div class="w-10"></div>
+        <!-- Spacer for centering -->
+      </div>
+    </header>
+    <!-- Main Content -->
+    <main
+      class="pt-24 pb-8 px-container-padding max-w-[720px] mx-auto min-h-screen flex flex-col justify-center relative overflow-hidden"
+    >
+      <!-- Atmospheric Background Elements -->
+      <div
+        class="absolute -top-24 -left-24 w-64 h-64 bg-primary-container/30 rounded-full blur-3xl float-animation"
+      ></div>
+      <div
+        class="absolute top-1/2 -right-32 w-80 h-80 bg-tertiary-container/20 rounded-full blur-3xl float-animation"
+        style="animation-delay: -2s"
+      ></div>
+      <!-- Header Section -->
+      <div class="text-center mb-10 relative z-10">
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-3">
+          Choose your Wall name
+        </h2>
+        <p class="font-body-md text-on-surface-variant max-w-[280px] mx-auto">
+          This is how you will appear on the Wall. Stay anonymous, stay safe.
+        </p>
+      </div>
+      <!-- Identity Generation Card -->
+      <div
+        class="glass-card rounded-xl p-8 mb-10 text-center shadow-[0px_20px_40px_rgba(5,139,3,0.06)] relative z-10 border border-white/50"
+      >
+        <div class="mb-2">
+          <span
+            class="font-label-sm text-label-sm text-primary uppercase tracking-widest opacity-60"
+            >Your Identity</span
+          >
+        </div>
+        <div
+          class="py-6 min-h-[100px] flex items-center justify-center transition-all duration-500"
+          id="name-container"
+        >
+          <h3
+            class="font-display-lg text-display-lg-mobile text-primary tracking-tight"
+            id="generated-name"
+          >
+            Quiet Willow
+          </h3>
+        </div>
+        <button
+          class="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-low text-primary font-label-sm text-label-sm hover:bg-surface-container-high transition-all active:scale-95 group"
+          id="shuffle-btn"
+        >
+          <span
+            class="material-symbols-outlined group-active:rotate-180 transition-transform duration-500"
+            data-icon="refresh"
+            >refresh</span
+          >
+          Shuffle Name
+        </button>
+      </div>
+      <!-- Contextual Tooltip/Link -->
+      <div class="text-center mb-12 relative z-10">
+        <button
+          class="inline-flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors py-2 px-4 rounded-lg hover:bg-white/30"
+        >
+          <span
+            class="material-symbols-outlined text-[18px]"
+            data-icon="help_outline"
+            >help_outline</span
+          >
+          Why is this anonymous?
+        </button>
+      </div>
+      <!-- Fixed Action Area -->
+      <div class="mt-auto relative z-10">
+        <button
+          class="w-full py-5 bg-surface-container-lowest text-primary rounded-full font-label-sm text-[16px] shadow-lg shadow-primary/10 hover:bg-surface-container-low active:scale-[0.98] transition-all disabled:opacity-40 disabled:scale-100 disabled:cursor-not-allowed mb-8"
+          id="complete-btn"
+          onclick="window.location.href='Community_Wall_User_.html'"
+        >
+          Complete Setup
+        </button>
+      </div>
+    </main>
+    <!-- Crisis Ribbon (Fixed at bottom during setup if needed, but here as a soft footer) -->
+    <footer class="w-full max-w-[720px] mx-auto px-container-padding pb-8 pt-4">
+      <div
+        class="bg-error/5 rounded-2xl p-4 flex items-center justify-between border border-error/10"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+          <span class="font-headline-md text-[14px] text-error font-medium"
+            >Help is available</span
+          >
+        </div>
+        <a
+          class="font-label-sm text-label-sm text-error underline underline-offset-4 decoration-error/30 hover:decoration-error transition-all"
+          href="#"
+          >Emergency Support</a
+        >
+      </div>
+    </footer>
+    <script>
+      const names = [
+        "Quiet Willow",
+        "Gentle Rain",
+        "Hidden Forest",
+        "Morning Mist",
+        "Starlit Path",
+        "Silent Peak",
+        "Emerald Leaf",
+        "Soft Echo",
+        "Calm River",
+        "Wandering Breeze",
+        "Golden Shore",
+        "Kindred Spirit",
+        "Lone Oak",
+        "Silver Cloud",
+        "Amber Sky",
+        "Velvet Moss",
+      ];
+
+      const nameElement = document.getElementById("generated-name");
+      const shuffleBtn = document.getElementById("shuffle-btn");
+      const completeBtn = document.getElementById("complete-btn");
+      const container = document.getElementById("name-container");
+
+      let isFirstSelection = true;
+
+      function shuffleName() {
+        // Add exit animation
+        nameElement.style.opacity = "0";
+        nameElement.style.transform = "translateY(10px) scale(0.95)";
+
+        setTimeout(() => {
+          const currentName = nameElement.innerText;
+          let newName = currentName;
+          while (newName === currentName) {
+            newName = names[Math.floor(Math.random() * names.length)];
+          }
+
+          nameElement.innerText = newName;
+
+          // Entrance animation
+          nameElement.style.opacity = "1";
+          nameElement.style.transform = "translateY(0) scale(1)";
+
+          if (isFirstSelection) {
+            completeBtn.disabled = false;
+            isFirstSelection = false;
+          }
+        }, 200);
+      }
+
+      shuffleBtn.addEventListener("click", shuffleName);
+
+      // Initial set up for button state (Prompt asks to be disabled until viewed/selected)
+      // Here we default to a state that requires at least one shuffle or just viewing.
+      // For the sake of UX, we will enable it after a small delay to simulate "viewed"
+      setTimeout(() => {
+        completeBtn.disabled = false;
+      }, 1500);
+
+      completeBtn.addEventListener("click", () => {
+        completeBtn.innerHTML =
+          '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span>';
+        completeBtn.disabled = true;
+        setTimeout(() => {
+          // Mock redirect
+          window.location.href = 'Community_Wall_User_.html';
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

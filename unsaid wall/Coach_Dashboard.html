@@ -1,0 +1,821 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Coach Workspace | Unsaid Wall</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400..700;1,400..700&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              secondary: "#006a30",
+              "on-tertiary-container": "#005257",
+              background: "#dfffde",
+              "secondary-dim": "#005d29",
+              "outline-variant": "#8eb792",
+              "on-background": "#10361a",
+              surface: "#dfffde",
+              "primary-container": "#7df168",
+              "surface-bright": "#dfffde",
+              "on-primary-fixed-variant": "#006300",
+              "inverse-primary": "#7df168",
+              error: "#b02500",
+              "tertiary-container": "#05ebf9",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#80eb97",
+              "on-tertiary": "#cefbff",
+              "inverse-surface": "#001204",
+              "surface-container-high": "#b9f0be",
+              "on-secondary-fixed": "#004a1f",
+              "surface-container": "#c1f5c5",
+              "secondary-fixed": "#8ef9a4",
+              "on-error-container": "#520c00",
+              "surface-tint": "#006b00",
+              "on-surface": "#10361a",
+              "on-surface-variant": "#3e6444",
+              "surface-container-low": "#cdfdd0",
+              "tertiary-fixed-dim": "#00dbe8",
+              "on-primary-fixed": "#004200",
+              "inverse-on-surface": "#7ea782",
+              "error-dim": "#b92902",
+              "tertiary-dim": "#00595e",
+              "on-secondary": "#ceffd1",
+              "on-primary": "#d3ffc2",
+              "surface-variant": "#b0ebb6",
+              primary: "#006b00",
+              "secondary-container": "#8ef9a4",
+              "primary-dim": "#005d00",
+              "on-secondary-container": "#005f2a",
+              "tertiary-fixed": "#05ebf9",
+              "primary-fixed-dim": "#6fe25b",
+              outline: "#59805e",
+              "on-tertiary-fixed": "#003d41",
+              "on-tertiary-fixed-variant": "#005c62",
+              "on-primary-container": "#005800",
+              "on-error": "#ffefec",
+              "on-secondary-fixed-variant": "#006a30",
+              "surface-container-highest": "#b0ebb6",
+              tertiary: "#00666c",
+              "surface-dim": "#a4e3ac",
+              "primary-fixed": "#7df168",
+              "error-container": "#f95630",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "16px",
+              "container-padding": "24px",
+              "section-gap": "48px",
+              unit: "8px",
+            },
+            fontFamily: {
+              "display-lg-mobile": ["Literata"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-md": ["Literata"],
+              "label-sm": ["Plus Jakarta Sans"],
+              "display-lg": ["Literata"],
+            },
+            fontSize: {
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "500" },
+              ],
+              "label-sm": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "40px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #dfffde;
+        color: #10361a;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+
+      .sidebar-active {
+        box-shadow: inset 4px 0 0 0 #006b00;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #8eb792;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen">
+    <!-- Top Navigation Anchor (Desktop only shell) -->
+    <header
+      class="fixed top-0 left-0 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 z-50 flex items-center px-6 justify-between"
+    >
+      <div class="flex items-center gap-4">
+        <h1 class="font-display-lg text-[24px] font-bold text-primary">
+          Unsaid Wall
+        </h1>
+        <span class="h-4 w-px bg-outline-variant/30"></span>
+        <div
+          class="flex items-center gap-2 px-3 py-1 bg-secondary-container rounded-full"
+        >
+          <span
+            class="material-symbols-outlined text-[18px] text-on-secondary-container"
+            >verified_user</span
+          >
+          <span class="font-label-sm text-label-sm text-on-secondary-container"
+            >Practitioner Workspace</span
+          >
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <div
+          class="flex items-center gap-3 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20"
+        >
+          <span class="font-label-sm text-label-sm text-on-surface-variant"
+            >Availability</span
+          >
+          <button
+            class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors"
+            id="availabilityToggle"
+            onclick="toggleAvailability()"
+          >
+            <span
+              class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6"
+              id="toggleCircle"
+            ></span>
+          </button>
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center overflow-hidden ring-2 ring-primary/10"
+          >
+            <img
+              alt="Coach Profile Picture"
+              class="w-full h-full object-cover"
+              data-alt="A professional headshot of a female mental health professional with a warm, empathetic smile. She is wearing a soft cream-colored blazer against a blurred background of a tranquil, sunlit office garden. The lighting is soft and high-key, reflecting a serene and life-affirming energy consistent with a modern minimalist aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBfL93zvogk848jRg7EFYBwbzIIgpR0jYdwaG_U131VOHXqsBRnXyU6gObKATqAtEyKKN849eA-BXpCxcmrubrGdyF7iY8p5mTwMtbWQt0g1pwWsGLBMQFzJRwKCRZGt9QtlJR51o3Dbjvg1RW8izRE1VQF9aLkLmrAUWZaE56iqYcSLrFkOgVo9_itc3ANI6Nz5xRr7tZo14aw_K2tiJySUYg_NMMwSIy5FpfORiJZIo88uQQczeTqKVLKI-LOrqhiuJNGjAOGGBO"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="flex pt-16 min-h-screen">
+      <!-- Side Navigation Anchor -->
+      <nav
+        class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container flex flex-col py-6 space-y-2 z-40 border-r border-outline-variant/10"
+      >
+        <div class="px-6 mb-8">
+          <p
+            class="font-headline-md text-headline-md text-secondary leading-tight"
+          >
+            Coach Workspace
+          </p>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">
+            Managing 12 active journeys
+          </p>
+        </div>
+        <!-- Main Nav Items -->
+        <a
+          class="flex items-center gap-3 px-6 py-3 bg-secondary-container text-on-secondary-container rounded-xl mx-2 font-label-sm text-label-sm transition-all"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >dashboard</span
+          >
+          Dashboard
+        </a>
+        <a
+          class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant mx-2 rounded-xl transition-all font-label-sm text-label-sm"
+          href="Community_Wall_User_.html"
+        >
+          <span class="material-symbols-outlined">forum</span> Client Wall
+        </a>
+        <a
+          class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant mx-2 rounded-xl transition-all font-label-sm text-label-sm"
+          href="My_Session_and_Chat.html"
+        >
+          <span class="material-symbols-outlined">history_edu</span> Session
+          Logs
+        </a>
+        <a
+          class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant mx-2 rounded-xl transition-all font-label-sm text-label-sm"
+          href="Coach_Dashboard.html"
+        >
+          <span class="material-symbols-outlined">leaderboard</span> Analytics
+        </a>
+        <a
+          class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant mx-2 rounded-xl transition-all font-label-sm text-label-sm"
+          href="Identity.html"
+        >
+          <span class="material-symbols-outlined">settings</span> Settings
+        </a>
+        <div class="mt-auto pt-6 border-t border-outline-variant/10">
+          <button
+            class="w-[calc(100%-32px)] mx-4 py-3 bg-primary text-on-primary rounded-full font-label-sm text-label-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform active:scale-95"
+          >
+            <span class="material-symbols-outlined text-[20px]">add</span> Start
+            Session
+          </button>
+          <div class="mt-6 flex flex-col gap-1">
+            <a
+              class="flex items-center gap-3 px-6 py-2 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors"
+              href="Resource_Library.html"
+            >
+              <span class="material-symbols-outlined text-[20px]">help</span>
+              Help Center
+            </a>
+            <a
+              class="flex items-center gap-3 px-6 py-2 text-error hover:opacity-80 font-label-sm text-label-sm transition-colors"
+              href="Landing.html"
+            >
+              <span class="material-symbols-outlined text-[20px]">logout</span>
+              Sign Out
+            </a>
+          </div>
+        </div>
+      </nav>
+      <!-- Main Content Canvas -->
+      <main
+        class="ml-64 flex-1 p-8 grid grid-cols-12 gap-gutter max-w-[1440px]"
+      >
+        <!-- Welcome Header -->
+        <div class="col-span-12 mb-4">
+          <h2 class="font-display-lg text-display-lg text-on-surface">
+            Welcome back, Dr. Aris
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
+            You have 4 chat sessions today and 3 flagged posts requiring review.
+          </p>
+        </div>
+        <!-- Stats Grid -->
+        <div class="col-span-3">
+          <div
+            class="glass-card p-6 rounded-lg flex flex-col gap-2"
+            style="
+              opacity: 1;
+              transform: translateY(0px);
+              transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            "
+          >
+            <span class="material-symbols-outlined text-primary text-[32px]"
+              >calendar_today</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Sessions Today</span
+            >
+            <span class="text-[32px] font-bold text-on-surface">4</span>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div
+            class="glass-card p-6 rounded-lg flex flex-col gap-2"
+            style="
+              opacity: 1;
+              transform: translateY(0px);
+              transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            "
+          >
+            <span class="material-symbols-outlined text-tertiary text-[32px]"
+              >speed</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Avg Response</span
+            >
+            <span class="text-[32px] font-bold text-on-surface">1.2h</span>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div
+            class="glass-card p-6 rounded-lg flex flex-col gap-2"
+            style="
+              opacity: 1;
+              transform: translateY(0px);
+              transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            "
+          >
+            <span class="material-symbols-outlined text-secondary text-[32px]"
+              >group</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Total Clients</span
+            >
+            <span class="text-[32px] font-bold text-on-surface">12</span>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div
+            class="glass-card p-6 rounded-lg flex flex-col gap-2"
+            style="
+              opacity: 1;
+              transform: translateY(0px);
+              transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            "
+          >
+            <span
+              class="material-symbols-outlined text-primary-fixed-dim text-[32px]"
+              >star</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Client Rating</span
+            >
+            <span class="text-[32px] font-bold text-on-surface">4.9</span>
+          </div>
+        </div>
+        <!-- Main Feed: Flagged Posts -->
+        <div class="col-span-8 flex flex-col gap-6">
+          <div class="flex flex-col gap-4 mb-2">
+            <div class="flex items-center justify-between">
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Active Sessions
+              </h3>
+              <span
+                class="flex items-center gap-2 text-primary font-label-sm text-label-sm"
+              >
+                <span class="relative flex h-2 w-2">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+                  ></span>
+                </span>
+                2 Live Now
+              </span>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Active Session 1 -->
+              <div
+                class="glass-card p-4 rounded-lg border border-primary/20 flex items-center justify-between group hover:bg-white/30 transition-all"
+                style="
+                  opacity: 1;
+                  transform: translateY(0px);
+                  transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+                "
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center font-bold text-on-primary-container"
+                  >
+                    LC
+                  </div>
+                  <div>
+                    <p class="font-label-sm text-label-sm font-bold">
+                      Liam Carter
+                    </p>
+                    <p
+                      class="text-[12px] text-on-surface-variant flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[14px]"
+                        >forum</span
+                      >
+                      Chat Session
+                    </p>
+                  </div>
+                </div>
+                <button
+                  class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-sm text-label-sm font-bold hover:shadow-lg transition-all active:scale-95"
+                >
+                  Join Session
+                </button>
+              </div>
+              <!-- Active Session 2 -->
+              <div
+                class="glass-card p-4 rounded-lg border border-primary/20 flex items-center justify-between group hover:bg-white/30 transition-all"
+                style="
+                  opacity: 1;
+                  transform: translateY(0px);
+                  transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+                "
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container"
+                  >
+                    EW
+                  </div>
+                  <div>
+                    <p class="font-label-sm text-label-sm font-bold">
+                      Emma Wilson
+                    </p>
+                    <p
+                      class="text-[12px] text-on-surface-variant flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[14px]"
+                        >forum</span
+                      >
+                      Chat Session
+                    </p>
+                  </div>
+                </div>
+                <button
+                  class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-sm text-label-sm font-bold hover:shadow-lg transition-all active:scale-95"
+                >
+                  Join Session
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline-md text-headline-md text-on-surface">
+              Flagged Wall Posts
+            </h3>
+            <button
+              class="text-primary font-label-sm text-label-sm hover:underline"
+            >
+              View All
+            </button>
+          </div>
+          <!-- Flagged Card 1 -->
+          <div
+            class="glass-card p-6 rounded-lg border-l-4 border-error relative overflow-hidden group"
+            style="
+              opacity: 1;
+              transform: translateY(0px);
+              transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            "
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-[12px]"
+                >
+                  JS
+                </div>
+                <div>
+                  <p class="font-label-sm text-label-sm font-bold">
+                    Anonymous user #492
+                  </p>
+                  <p class="text-[12px] text-on-surface-variant">
+                    Flagged for: Severe Distress Patterns
+                  </p>
+                </div>
+              </div>
+              <div
+                class="bg-error/10 text-error px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[14px]"
+                  >priority_high</span
+                >
+                High Risk
+              </div>
+            </div>
+            <p
+              class="font-body-md text-body-md text-on-surface leading-relaxed mb-6 italic"
+            >
+              "I feel like I'm walking through a thick fog every day now. The
+              quietness used to be peaceful, but now it just feels heavy. I'm
+              not sure how much longer I can keep carrying this without someone
+              noticing."
+            </p>
+            <div class="flex gap-3">
+              <button
+                class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-sm text-label-sm font-bold hover:shadow-lg transition-all"
+              >
+                Reach Out Now
+              </button>
+              <button
+                class="bg-surface-variant text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm font-bold hover:bg-surface-container-high transition-all"
+              >
+                Dismiss
+              </button>
+            </div>
+          </div>
+          <!-- Flagged Card 2 -->
+          <div
+            class="glass-card p-6 rounded-lg border-l-4 border-error-container relative overflow-hidden group"
+            style="
+              opacity: 1;
+              transform: translateY(0px);
+              transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            "
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-[12px]"
+                >
+                  ML
+                </div>
+                <div>
+                  <p class="font-label-sm text-label-sm font-bold">
+                    Mila L. (Active Client)
+                  </p>
+                  <p class="text-[12px] text-on-surface-variant">
+                    Flagged for: Self-isolation themes
+                  </p>
+                </div>
+              </div>
+              <div
+                class="bg-error-container/10 text-error-container px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[14px]"
+                  >warning</span
+                >
+                Moderate Risk
+              </div>
+            </div>
+            <p
+              class="font-body-md text-body-md text-on-surface leading-relaxed mb-6 italic"
+            >
+              "The garden is thriving but I feel like I'm wilting. Cancelled all
+              my plans this weekend. Just want to be alone with the silence. Is
+              this the quiet strength we talked about, or am I just giving up?"
+            </p>
+            <div class="flex gap-3">
+              <button
+                class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-sm text-label-sm font-bold hover:shadow-lg transition-all"
+              >
+                Direct Message
+              </button>
+              <button
+                class="bg-surface-variant text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm font-bold hover:bg-surface-container-high transition-all"
+              >
+                Review in Session
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Sidebar Widgets -->
+        <aside class="col-span-4 flex flex-col gap-6">
+          <!-- Upcoming Sessions -->
+          <div
+            class="bg-surface-container-low rounded-lg p-6 shadow-sm border border-outline-variant/10"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h4
+                class="font-label-sm text-label-sm font-bold uppercase tracking-widest text-on-surface-variant"
+              >
+                Upcoming Sessions
+              </h4>
+              <span class="material-symbols-outlined text-primary"
+                >event_upcoming</span
+              >
+            </div>
+            <div class="space-y-4">
+              <div
+                class="flex items-center gap-4 group cursor-pointer p-2 hover:bg-surface-container-high rounded-lg transition-colors"
+              >
+                <div
+                  class="w-12 h-12 rounded-lg bg-primary-container flex flex-col items-center justify-center text-on-primary-container font-bold"
+                >
+                  <span class="text-[10px]">OCT</span>
+                  <span class="text-[18px] leading-none">24</span>
+                </div>
+                <div class="flex-1">
+                  <p class="font-label-sm text-label-sm font-bold">
+                    David Chen
+                  </p>
+                  <p class="text-[12px] text-on-surface-variant">
+                    10:30 AM • 50 mins
+                  </p>
+                </div>
+                <span
+                  class="material-symbols-outlined text-[18px] text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                  >forum</span
+                >
+              </div>
+              <div
+                class="flex items-center gap-4 group cursor-pointer p-2 hover:bg-surface-container-high rounded-lg transition-colors"
+              >
+                <div
+                  class="w-12 h-12 rounded-lg bg-secondary-container flex flex-col items-center justify-center text-on-secondary-container font-bold"
+                >
+                  <span class="text-[10px]">OCT</span>
+                  <span class="text-[18px] leading-none">24</span>
+                </div>
+                <div class="flex-1">
+                  <p class="font-label-sm text-label-sm font-bold">
+                    Sarah Jenkins
+                  </p>
+                  <p class="text-[12px] text-on-surface-variant">
+                    01:00 PM • 50 mins
+                  </p>
+                </div>
+                <span
+                  class="material-symbols-outlined text-[18px] text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                  >forum</span
+                >
+              </div>
+            </div>
+            <button
+              class="w-full mt-6 py-2 border border-outline text-on-surface font-label-sm text-label-sm rounded-full hover:bg-surface-container transition-colors"
+            >
+              Full Schedule
+            </button>
+          </div>
+          <!-- Pending Requests -->
+          <div
+            class="bg-surface-container-low rounded-lg p-6 shadow-sm border border-outline-variant/10"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h4
+                class="font-label-sm text-label-sm font-bold uppercase tracking-widest text-on-surface-variant"
+              >
+                Pending Requests
+              </h4>
+              <div
+                class="bg-error text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center"
+              >
+                2
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div
+                class="p-3 bg-surface-container rounded-lg border border-primary/10"
+              >
+                <div class="flex items-center gap-3 mb-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold text-[12px]"
+                  >
+                    RM
+                  </div>
+                  <p class="font-label-sm text-label-sm font-bold">Robert M.</p>
+                </div>
+                <p class="text-[12px] text-on-surface-variant mb-3">
+                  Matching for: Grief counseling, Mindfulness
+                </p>
+                <div class="flex gap-2">
+                  <button
+                    class="flex-1 py-1 bg-primary text-on-primary text-[11px] rounded-full font-bold"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    class="flex-1 py-1 border border-outline text-on-surface text-[11px] rounded-full"
+                  >
+                    Profile
+                  </button>
+                </div>
+              </div>
+              <div
+                class="p-3 bg-surface-container rounded-lg border border-primary/10"
+              >
+                <div class="flex items-center gap-3 mb-2">
+                  <div
+                    class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-[12px]"
+                  >
+                    AY
+                  </div>
+                  <p class="font-label-sm text-label-sm font-bold">Amara Y.</p>
+                </div>
+                <p class="text-[12px] text-on-surface-variant mb-3">
+                  Matching for: Workplace anxiety
+                </p>
+                <div class="flex gap-2">
+                  <button
+                    class="flex-1 py-1 bg-primary text-on-primary text-[11px] rounded-full font-bold"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    class="flex-1 py-1 border border-outline text-on-surface text-[11px] rounded-full"
+                  >
+                    Profile
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Atmospheric Element -->
+          <div
+            class="relative h-48 rounded-lg overflow-hidden bg-secondary-dim"
+          >
+            <img
+              class="w-full h-full object-cover opacity-60"
+              data-alt="An atmospheric photograph of a lush, misty forest floor with vibrant moss and soft light filtering through a canopy of deep green leaves. The mood is incredibly tranquil and rejuvenating, emphasizing a life-affirming energy. The color palette is a sophisticated mix of deep emerald, vibrant forest green, and soft sage, fitting the serene sanctuary aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Q0PN-XOumBbGS7Lz_nIVz6QgEw42SQAnP-nxPSga2RiHGsJ5Fsx7kar9UF-aF1abvakjzPArVARii9B6MTN_RPHwl2BFRZJhdrilqiaLa3Qufo6VGrKOYz0R2WLFZkmODHAu5vh2OGhSYdzDBLYLQepz8qptKoYW5GCiuHxLSGv9wOj4HMER3GBSATbO5nvBER44use1b-P4hrFA5YknO86SLU7MunJC3lqbiuK4QljscIUj9_Nr4bdMcNJAAMLp-CzPV9ozpeAt"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-secondary-dim/80 to-transparent p-6 flex flex-col justify-end"
+            >
+              <p
+                class="text-white font-headline-md text-[18px] italic leading-tight"
+              >
+                "Growth is a quiet process."
+              </p>
+              <p class="text-secondary-fixed text-[12px] mt-1">
+                Remember to take 5 minutes today.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+    <!-- Micro-interactions Script -->
+    <script>
+      function toggleAvailability() {
+        const btn = document.getElementById("availabilityToggle");
+        const circle = document.getElementById("toggleCircle");
+        const isAvailable = btn.classList.contains("bg-primary");
+
+        if (isAvailable) {
+          btn.classList.remove("bg-primary");
+          btn.classList.add("bg-on-surface-variant");
+          circle.classList.remove("translate-x-6");
+          circle.classList.add("translate-x-1");
+        } else {
+          btn.classList.remove("bg-on-surface-variant");
+          btn.classList.add("bg-primary");
+          circle.classList.remove("translate-x-1");
+          circle.classList.add("translate-x-6");
+        }
+      }
+
+      // Simple animation for flagged cards on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".glass-card");
+        cards.forEach((card, index) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(20px)";
+          setTimeout(() => {
+            card.style.transition = "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, index * 100);
+        });
+      });
+    </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('button').forEach(function(btn) {
+    var t = (btn.textContent||btn.innerText).trim().replace(/\s+/g,' ');
+    if (t.includes('Start Session')) btn.onclick = function() { window.location.href = 'Coach_Chat.html'; };
+  });
+});
+</script>
+</body>
+</html>
